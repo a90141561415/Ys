@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>線上預約 | 預約表單</title>
+    <title>線上預約 | 傳送至LINE官方帳號</title>
     <style>
         * {
             margin: 0;
@@ -175,17 +174,23 @@
             display: none;
         }
 
-        /* 按鈕 */
+        /* 按鈕區塊 - 雙按鈕設計 */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
         .btn-submit {
             background: #1f3b4c;
             color: white;
             border: none;
-            width: 100%;
+            flex: 2;
             padding: 1rem;
             font-size: 1.1rem;
             font-weight: 700;
             border-radius: 3rem;
-            margin-top: 1rem;
             cursor: pointer;
             transition: all 0.25s;
             box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
@@ -203,6 +208,29 @@
 
         .btn-submit:active {
             transform: translateY(1px);
+        }
+
+        .line-btn-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .line-btn-wrapper a {
+            display: inline-block;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .line-btn-wrapper a:hover {
+            transform: scale(1.02);
+        }
+
+        .line-btn-wrapper img {
+            height: 48px;
+            border-radius: 28px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         /* 提示訊息 */
@@ -296,6 +324,12 @@
             .duration-option {
                 flex: 1 1 80px;
             }
+            .action-buttons {
+                flex-direction: column;
+            }
+            .line-btn-wrapper img {
+                height: 44px;
+            }
         }
     </style>
 </head>
@@ -328,9 +362,9 @@
                     </div>
                 </div>
 
-                <!-- 右側欄位：預約細項 (服務時間改為時長選項，時段自行填寫，刪除人數與email) -->
+                <!-- 右側欄位：預約細項 -->
                 <div class="form-col">
-                    <!-- 服務時間 (時長) 選項 更優雅的描述 -->
+                    <!-- 服務時間 (時長) 選項 -->
                     <div class="input-group">
                         <label>⏱️ 服務時間 <span style="color:#e53e3e;">*</span></label>
                         <div class="duration-group" id="durationGroup">
@@ -364,7 +398,7 @@
                         <input type="date" id="date" name="date" required>
                     </div>
 
-                    <!-- 預約時段：改為自行填寫 (文字輸入) -->
+                    <!-- 預約時段：自行填寫 -->
                     <div class="input-group">
                         <label>⏰ 預約時段 <span style="color:#e53e3e;">*</span></label>
                         <div class="time-custom-wrapper">
@@ -381,9 +415,20 @@
                 <div class="summary-detail" id="summaryText">請填寫上方資料，預約資訊將即時顯示。</div>
             </div>
 
-            <button type="submit" class="btn-submit">
-                <span>✅</span> 確認預約
-            </button>
+            <!-- 雙按鈕區塊：確認預約 + 傳送到LINE -->
+            <div class="action-buttons">
+                <button type="submit" class="btn-submit" id="confirmBookingBtn">
+                    <span>✅</span> 確認預約
+                </button>
+                <div class="line-btn-wrapper">
+                    <a href="https://lin.ee/oS5k6PH" target="_blank" id="lineShareBtn" rel="noopener noreferrer">
+                        <img src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png" alt="加入好友 傳送預約" height="48" border="0">
+                    </a>
+                </div>
+            </div>
+            <p style="font-size: 0.7rem; text-align: center; margin-top: 1rem; color: #5f7f8c;">
+                💡 點擊「確認預約」儲存資料後，可透過LINE按鈕傳送預約資訊給官方帳號。
+            </p>
         </form>
     </div>
 </div>
@@ -401,10 +446,14 @@
         const customTimeInput = document.getElementById('customTime');
         const serviceItemTextarea = document.getElementById('serviceItem');
         const summaryDiv = document.getElementById('summaryText');
+        const lineBtn = document.getElementById('lineShareBtn');
 
-        // 服務時長選項 (duration)
+        // 服務時長選項
         const durationOptions = document.querySelectorAll('.duration-option');
-        let selectedDurationValue = '';     // 儲存完整文字 (例如 "60分鐘 經典療程")
+        let selectedDurationValue = '';     // 完整文字 (例如 "60分鐘 經典療程")
+        
+        // 儲存當前有效的預約資料物件 (用於LINE傳送)
+        let currentBookingData = null;
 
         // 設定日期限制: 不選過去, 未來三個月
         const today = new Date();
@@ -420,9 +469,8 @@
         const maxD = String(maxDateObj.getDate()).padStart(2, '0');
         dateInput.setAttribute('max', `${maxY}-${maxM}-${maxD}`);
 
-        // 初始化服務時長選擇 (預設選中 60分鐘 經典療程)
+        // 初始化服務時長選擇 (預設選中 60分鐘)
         function initDurationSelection() {
-            // 預設第二個選項 (60分鐘) 更常用
             const defaultOption = durationOptions[1];
             if (defaultOption) {
                 const radioInside = defaultOption.querySelector('input[type="radio"]');
@@ -432,7 +480,6 @@
                 }
                 defaultOption.classList.add('selected');
             } else if(durationOptions[0]){
-                // fallback
                 const first = durationOptions[0];
                 const radioFirst = first.querySelector('input[type="radio"]');
                 if(radioFirst) {
@@ -447,31 +494,27 @@
                     e.stopPropagation();
                     const radio = option.querySelector('input[type="radio"]');
                     if (!radio) return;
-                    // 清除所有樣式
                     durationOptions.forEach(opt => opt.classList.remove('selected'));
                     option.classList.add('selected');
                     radio.checked = true;
                     selectedDurationValue = radio.value;
-                    // 更新即時摘要
                     updateSummaryPreview();
                 });
             });
         }
 
-        // 取得服務時間顯示文字
         function getDurationDisplayText() {
             if (!selectedDurationValue) return '未選擇服務時間';
             return selectedDurationValue;
         }
 
-        // 取得項目/部位文字 (簡短呈現)
         function getServiceItemDisplay() {
             let raw = serviceItemTextarea.value.trim();
             if (!raw) return '尚未填寫';
             return raw.length > 35 ? raw.substring(0, 32) + '…' : raw;
         }
 
-        // 更新下方即時摘要
+        // 更新即時摘要
         function updateSummaryPreview() {
             const customerName = nameInput.value.trim() || '(未填)';
             const phoneVal = phoneInput.value.trim() || '(未填)';
@@ -479,7 +522,6 @@
             const dateVal = dateInput.value;
             const timeText = customTimeInput.value.trim() || '(尚未填寫時段)';
             const itemText = getServiceItemDisplay();
-
             let formattedDate = dateVal ? dateVal.replace(/-/g, '/') : '未選擇日期';
             
             summaryDiv.innerHTML = `
@@ -503,7 +545,6 @@
             });
         }
 
-        // 顯示浮動訊息
         function showToast(message, isError = false) {
             const toast = document.getElementById('toastMsg');
             toast.textContent = message;
@@ -523,8 +564,21 @@
             }, 2800);
         }
 
-        // 表單驗證
-        function validateForm() {
+        // 從表單獲取預約資料物件
+        function getBookingDataFromForm() {
+            return {
+                name: nameInput.value.trim(),
+                phone: phoneInput.value.trim(),
+                serviceItem: serviceItemTextarea.value.trim(),
+                duration: selectedDurationValue,
+                date: dateInput.value,
+                customTime: customTimeInput.value.trim(),
+                timestamp: new Date().toLocaleString()
+            };
+        }
+
+        // 驗證表單 (回傳 true/false，並自動聚焦)
+        function validateFormForData() {
             const name = nameInput.value.trim();
             if (!name) {
                 showToast('請填寫姓名', true);
@@ -543,37 +597,30 @@
                 phoneInput.focus();
                 return false;
             }
-            
-            // 項目/部位 不能空白
             const serviceItemRaw = serviceItemTextarea.value.trim();
             if (!serviceItemRaw) {
                 showToast('請填寫預約項目 / 部位 (例如：身體、臉部、櫸木⋯)', true);
                 serviceItemTextarea.focus();
                 return false;
             }
-            
             if (!selectedDurationValue) {
                 showToast('請選擇服務時間 (30/60/90/120分鐘)', true);
                 return false;
             }
-            
             if (!dateInput.value) {
                 showToast('請選擇預約日期', true);
                 dateInput.focus();
                 return false;
             }
-            
             const customTime = customTimeInput.value.trim();
             if (!customTime) {
                 showToast('請填寫預約時段 (例如：14:30 / 上午10點)', true);
                 customTimeInput.focus();
                 return false;
             }
-            
-            // 週日提醒 (選擇性)
+            // 週日提醒
             const selectedDate = new Date(dateInput.value);
-            const dayOfWeek = selectedDate.getDay();
-            if (dayOfWeek === 0) {
+            if (selectedDate.getDay() === 0) {
                 if(!confirm('您選擇的是週日，部分服務可能需要確認營業時間，確定要預約嗎？')) {
                     return false;
                 }
@@ -581,42 +628,145 @@
             return true;
         }
 
-        // 處理提交
-        function handleSubmit(e) {
-            e.preventDefault();
-            if (!validateForm()) return;
-            
-            // 組合預約資料
-            const bookingData = {
-                id: 'BK' + Date.now(),
-                name: nameInput.value.trim(),
-                phone: phoneInput.value.trim(),
-                serviceItem: serviceItemTextarea.value.trim(),
-                duration: selectedDurationValue,
-                date: dateInput.value,
-                customTime: customTimeInput.value.trim(),
-                createdTime: new Date().toLocaleString()
-            };
-            
-            // 可選擇儲存至 localStorage (保留歷史)
+        // 儲存至 localStorage 並更新 currentBookingData
+        function saveBookingToLocalAndCache(bookingData) {
             try {
                 let history = localStorage.getItem('bookingHistory');
                 let bookingsArray = history ? JSON.parse(history) : [];
-                bookingsArray.unshift(bookingData);
+                // 加上簡易id
+                const newRecord = { ...bookingData, id: 'BK' + Date.now() };
+                bookingsArray.unshift(newRecord);
                 if(bookingsArray.length > 20) bookingsArray.pop();
                 localStorage.setItem('bookingHistory', JSON.stringify(bookingsArray));
-            } catch(e) { /* 靜默 */ }
+                // 更新 currentBookingData 為最新紀錄 (含id)
+                currentBookingData = newRecord;
+                return newRecord;
+            } catch(e) { 
+                console.warn(e);
+                currentBookingData = { ...bookingData, id: 'BK' + Date.now() };
+                return currentBookingData;
+            }
+        }
+
+        // 製作 LINE 傳送訊息 (純文字格式，適合貼在官方帳號對話框)
+        function buildLineMessage(booking) {
+            if (!booking) return '';
+            const header = '📋 新預約通知 📋\n';
+            const nameLine = `👤 姓名：${booking.name || '未填'}\n`;
+            const phoneLine = `📞 電話：${booking.phone || '未填'}\n`;
+            const serviceLine = `📝 項目／部位：${booking.serviceItem || '未填'}\n`;
+            const durationLine = `⏱️ 服務時間：${booking.duration || '未填'}\n`;
+            const dateLine = `📆 預約日期：${booking.date || '未填'}\n`;
+            const timeLine = `⏰ 預約時段：${booking.customTime || '未填'}\n`;
+            const timeStampLine = `🕒 填寫時間：${booking.timestamp || new Date().toLocaleString()}\n`;
+            const footer = `\n請儘快與顧客確認，謝謝！`;
+            return header + nameLine + phoneLine + serviceLine + durationLine + dateLine + timeLine + timeStampLine + footer;
+        }
+
+        // 處理「確認預約」按鈕：驗證、儲存、顯示快訊、更新currentBookingData
+        function handleConfirmBooking(e) {
+            e.preventDefault();  // 防止表單默認提交刷新頁面
+            if (!validateFormForData()) return;
+            
+            // 獲取當前資料
+            const bookingRaw = getBookingDataFromForm();
+            const savedRecord = saveBookingToLocalAndCache(bookingRaw);
             
             // 顯示成功訊息
-            const serviceItemShort = bookingData.serviceItem.length > 25 ? bookingData.serviceItem.substring(0,22)+'…' : bookingData.serviceItem;
-            const successMsg = `✅ 預約成功！\n\n📌 預約編號：${bookingData.id}\n👤 姓名：${bookingData.name}\n📞 電話：${bookingData.phone}\n📝 項目／部位：${bookingData.serviceItem}\n⏱️ 服務時間：${bookingData.duration}\n📅 預約日期：${bookingData.date}\n⏰ 預約時段：${bookingData.customTime}\n\n感謝您的預約，我們將盡快與您確認！`;
-            
+            const durationShow = savedRecord.duration || '';
+            const successMsg = `✅ 預約資料已暫存！\n\n📌 預約編號：${savedRecord.id}\n👤 姓名：${savedRecord.name}\n📞 電話：${savedRecord.phone}\n📝 項目：${savedRecord.serviceItem}\n⏱️ 服務時間：${durationShow}\n📅 日期：${savedRecord.date}\n⏰ 時段：${savedRecord.customTime}\n\n可點選右側「LINE按鈕」將預約內容傳送至官方帳號。`;
             alert(successMsg);
-            showToast(`預約完成！編號 ${bookingData.id}`, false);
+            showToast(`預約資料已儲存，可傳送至LINE`, false);
             
-            // 選擇性保留表單內容，但可將時段與項目保留，方便再次預約但不清空。但為了使用者體驗，不強制全部清空，
-            // 但可以將姓名/電話保留原樣，將焦點移到姓名方便繼續預約。不清除任何內容讓使用者手動調整。
-            nameInput.focus();
+            // 更新摘要 (保持即時)
+            updateSummaryPreview();
+        }
+        
+        // 處理LINE按鈕點擊：先確保有 currentBookingData，若無則提示或自動儲存當前有效表單內容
+        function handleLineClick(e) {
+            // 如果還沒有 currentBookingData 或者表單內容已經變更與 currentBookingData 不同，則先驗證並儲存最新資料
+            const currentFormData = getBookingDataFromForm();
+            let needToSave = false;
+            
+            // 簡易比對：若無 currentBookingData 或者 關鍵欄位不一致，則重新儲存
+            if (!currentBookingData) {
+                needToSave = true;
+            } else {
+                if (currentBookingData.name !== currentFormData.name ||
+                    currentBookingData.phone !== currentFormData.phone ||
+                    currentBookingData.serviceItem !== currentFormData.serviceItem ||
+                    currentBookingData.duration !== currentFormData.duration ||
+                    currentBookingData.date !== currentFormData.date ||
+                    currentBookingData.customTime !== currentFormData.customTime) {
+                    needToSave = true;
+                }
+            }
+            
+            if (needToSave) {
+                // 先驗證表單是否填寫完整
+                if (!validateFormForData()) {
+                    // 驗證失敗時阻止 LINE 跳轉，讓使用者先補齊資料
+                    e.preventDefault();
+                    showToast('請先完整填寫預約資料，再傳送至LINE', true);
+                    return false;
+                }
+                // 驗證通過，儲存最新資料至 currentBookingData
+                const freshData = getBookingDataFromForm();
+                const saved = saveBookingToLocalAndCache(freshData);
+                currentBookingData = saved;
+                showToast('已更新預約資料，即將開啟LINE', false);
+            }
+            
+            if (!currentBookingData) {
+                // 防呆
+                if (!validateFormForData()) {
+                    e.preventDefault();
+                    showToast('請填寫完整預約資訊', true);
+                    return false;
+                }
+                const fallbackData = getBookingDataFromForm();
+                const savedFallback = saveBookingToLocalAndCache(fallbackData);
+                currentBookingData = savedFallback;
+            }
+            
+            // 建立訊息文字
+            const messageText = buildLineMessage(currentBookingData);
+            // 編碼訊息
+            const encodedMsg = encodeURIComponent(messageText);
+            // 官方 LINE 連結: https://lin.ee/oS5k6PH 是加入好友連結，若要傳送訊息需搭配 ?text= 參數，
+            // 但官方帳號通常需要先加入好友，點擊後會開啟該官方帳號對話視窗，若使用 ?text= 參數可以在手機LINE預填訊息 (僅支援LINE內建)
+            // 注意: 官方帳號連結加入好友後若要帶入訊息，可以使用 https://line.me/R/ti/p/@帳號?text=xxx 格式，但此為「@帳號」方式。
+            // 但提供的連結 lin.ee/oS5k6PH 為 LINE 官方帳號加好友短網址，轉址後為 https://line.me/R/ti/p/ 開頭，支援 ?text= 預填訊息。
+            // 為了讓顧客傳送預約內容，我們組合出帶有預填訊息的加好友+訊息連結。
+            // 方法: 將原本的 href 改為加好友連結並帶上 text 參數。
+            const lineBaseUrl = 'https://lin.ee/oS5k6PH';
+            // 由於短網址無法直接附加參數，但LINE短網址最終會導向至 line.me/R/ti/p/xxx，建議使用完整格式: https://line.me/R/ti/p/@??? 但短網址仍可透過額外處理，
+            // 為了確保預填訊息，改採直接使用 line.me 官方格式: 先獲取官方帳號ID 但短網址無法得知真實ID，但用戶原本需求是「傳送到官方LINE」並使用提供的按鈕圖。
+            // 提供最佳方案: 點選LINE按鈕時，打開新視窗，並且在新視窗中將訊息複製到剪貼簿(提醒貼上)，或者改為彈出視窗複製訊息。
+            // 為符合友善體驗，採用另開視窗並自動複製預約文字，使用者可直接貼到官方LINE對話框。
+            e.preventDefault();
+            
+            // 複製訊息到剪貼簿
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(messageText).then(() => {
+                    showToast('📋 預約內容已複製，請貼到LINE官方帳號傳送', false);
+                }).catch(() => {
+                    alert('請手動複製預約內容：\n\n' + messageText);
+                });
+            } else {
+                alert('請手動複製預約內容並傳送至官方LINE：\n\n' + messageText);
+            }
+            
+            // 再開啟LINE官方帳號連結 (加入好友/聊天)
+            window.open(lineBaseUrl, '_blank', 'noopener,noreferrer');
+            return false;
+        }
+        
+        // 綁定LINE按鈕事件
+        function bindLineButton() {
+            if (lineBtn) {
+                lineBtn.addEventListener('click', handleLineClick);
+            }
         }
         
         // 綁定即時摘要更新事件
@@ -626,12 +776,9 @@
                 input.addEventListener('input', updateSummaryPreview);
                 input.addEventListener('change', updateSummaryPreview);
             });
-            // 時長選擇事件已在 initDurationSelection 中透過點擊觸發更新摘要，但為了確保duration變更時摘要也更新
-            // 在點擊事件內已經呼叫 updateSummaryPreview，另外再補一個自定義事件監聽但不用重複。
             updateSummaryPreview();
         }
         
-        // 設定預設日期為明天 (提升便利性)
         function setDefaultDate() {
             if(!dateInput.value) {
                 const tomorrow = new Date(today);
@@ -643,7 +790,6 @@
             }
         }
         
-        // 設定預約時段 placeholder 提示
         function setCustomTimePlaceholder() {
             customTimeInput.placeholder = "例如：14:30、上午11點、15:00~16:00";
         }
@@ -653,8 +799,14 @@
             setDefaultDate();
             setCustomTimePlaceholder();
             bindSummaryEvents();
-            form.addEventListener('submit', handleSubmit);
-            // 再確保服務項目textarea也有即時更新
+            // 綁定確認預約按鈕 (取代原本 form submit)
+            const confirmBtn = document.getElementById('confirmBookingBtn');
+            if (confirmBtn) {
+                confirmBtn.addEventListener('click', handleConfirmBooking);
+            }
+            bindLineButton();
+            // 避免表單傳統提交刷新
+            form.addEventListener('submit', (e) => e.preventDefault());
             updateSummaryPreview();
         }
         
