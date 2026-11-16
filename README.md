@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
@@ -24,37 +23,41 @@
       --shadow-card: 0 10px 24px rgba(43, 66, 54, 0.14);
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
     }
 
-    html {
-      width: 100%;
+    html, body {
+      width: 100% !important;
+      max-width: 100vw !important;
       min-height: 100%;
+      overflow-x: hidden !important;
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
-    }
-
-    body {
-      width: 100%;
-      min-width: 320px;
-      min-height: 100vh;
-      overflow-x: hidden;
       font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
       background-color: var(--bg-cream);
       color: var(--text-primary);
+    }
+
+    /* 外框保護殼：強制鎖死在視窗寬度內，防止被子元素撐開 */
+    .app-shell {
+      width: 100%;
+      max-width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
+      background-color: var(--bg-cream);
       background-image:
         radial-gradient(circle at 10% 15%, rgba(70, 102, 86, 0.06) 0%, transparent 45%),
         radial-gradient(circle at 90% 85%, rgba(184, 152, 106, 0.08) 0%, transparent 45%);
     }
 
     button {
-      min-height: 42px;
+      min-height: 40px;
       touch-action: manipulation;
       font-family: inherit;
     }
@@ -64,24 +67,25 @@
       width: 100%;
       max-width: 1140px;
       margin: 0 auto;
-      padding: 18px 24px;
+      padding: 14px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       z-index: 10;
     }
 
     .brand-group {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       min-width: 0;
+      flex: 1;
     }
 
     .brand-emblem {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: var(--sage-soft);
       border: 1px solid var(--sage-border);
@@ -95,37 +99,46 @@
     .brand-titles {
       display: flex;
       flex-direction: column;
+      min-width: 0;
     }
 
     .brand-titles .zh-title {
-      font-size: 1.08rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--sage-deep);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .brand-titles .en-subtitle {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       color: var(--text-secondary);
-      letter-spacing: 0.14em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .btn-ref {
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.9);
       border: 1px solid var(--sage-border);
       color: var(--sage-deep);
-      padding: 8px 16px;
-      border-radius: 24px;
-      font-size: 0.84rem;
+      padding: 7px 13px;
+      border-radius: 22px;
+      font-size: 0.8rem;
       font-weight: 500;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 5px;
+      flex-shrink: 0;
+      white-space: nowrap;
       transition: all 0.2s ease;
     }
 
@@ -134,8 +147,9 @@
       flex: 1;
       width: 100%;
       max-width: 1140px;
+      min-width: 0;
       margin: 0 auto;
-      padding: 12px clamp(14px, 3vw, 28px) 36px;
+      padding: 8px 14px 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -145,7 +159,9 @@
     .view-section {
       display: none;
       width: 100%;
-      animation: gentleFade 0.5s ease forwards;
+      max-width: 100%;
+      min-width: 0;
+      animation: gentleFade 0.45s ease forwards;
     }
 
     .view-section.active {
@@ -155,22 +171,23 @@
     }
 
     @keyframes gentleFade {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     /* === 畫面 1：靜心迎賓 === */
     .welcome-card {
       text-align: center;
-      max-width: 540px;
-      padding: 28px 16px;
+      width: 100%;
+      max-width: 520px;
+      padding: 20px 10px;
     }
 
     .breath-orb-container {
       position: relative;
-      width: 148px;
-      height: 148px;
-      margin: 0 auto 30px;
+      width: 136px;
+      height: 136px;
+      margin: 0 auto 26px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -186,22 +203,22 @@
 
     .breath-aura-inner {
       position: absolute;
-      inset: 16px;
+      inset: 14px;
       border-radius: 50%;
       border: 1px solid rgba(70, 102, 86, 0.28);
       animation: calmBreath 6s ease-in-out infinite 0.5s;
     }
 
     .breath-center {
-      width: 82px;
-      height: 82px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
       background: var(--sage-deep);
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       letter-spacing: 0.12em;
       box-shadow: 0 8px 24px rgba(43, 66, 54, 0.24);
       z-index: 2;
@@ -213,39 +230,39 @@
     }
 
     .eyebrow-tag {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       color: var(--gold-warm);
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .welcome-heading {
-      font-size: 1.85rem;
+      font-size: clamp(1.45rem, 5.5vw, 1.85rem);
       font-weight: 600;
       color: var(--sage-deep);
       line-height: 1.4;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       letter-spacing: 0.04em;
     }
 
     .welcome-copy {
-      font-size: 0.98rem;
+      font-size: 0.94rem;
       color: var(--text-secondary);
-      line-height: 1.85;
-      margin-bottom: 34px;
+      line-height: 1.8;
+      margin-bottom: 30px;
     }
 
     .btn-sage-solid {
       background: var(--sage-deep);
       color: #fff;
       border: none;
-      padding: 15px 38px;
-      border-radius: 32px;
-      font-size: 1rem;
+      padding: 14px 34px;
+      border-radius: 30px;
+      font-size: 0.98rem;
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       cursor: pointer;
       box-shadow: 0 10px 24px rgba(43, 66, 54, 0.2);
       display: inline-flex;
@@ -259,57 +276,71 @@
       transform: scale(0.98);
     }
 
-    /* === 畫面 2：78張橫向滑動牌陣 === */
+    /* === 畫面 2：78 張橫向滑動牌陣（關鍵修正：防止撐開父層） === */
     .deck-header {
       text-align: center;
-      max-width: 600px;
-      margin-bottom: 18px;
+      width: 100%;
+      max-width: 560px;
+      padding: 0 8px;
+      margin-bottom: 14px;
     }
 
     .deck-header h2 {
-      font-size: 1.42rem;
+      font-size: clamp(1.18rem, 4.5vw, 1.42rem);
       font-weight: 600;
       color: var(--sage-deep);
       line-height: 1.45;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .deck-header p {
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
     .deck-toolbar {
+      width: 100%;
+      max-width: 560px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 16px;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding: 0 4px;
     }
 
     .pill-hint {
       background: var(--gold-pale);
       color: #7D6138;
-      padding: 8px 18px;
-      border-radius: 24px;
-      font-size: 0.84rem;
+      padding: 7px 14px;
+      border-radius: 22px;
+      font-size: 0.8rem;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
     .deck-carousel-wrap {
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
       position: relative;
-      margin: 8px 0 14px;
+      margin: 4px 0 12px;
     }
 
     .deck-scroller {
       width: 100%;
+      max-width: 100%;
       overflow-x: auto;
-      padding: 20px 24px 28px;
+      overflow-y: hidden;
+      padding: 16px 16px 24px;
       display: flex;
-      gap: 16px;
+      flex-wrap: nowrap;
+      gap: 12px;
       scroll-snap-type: x proximity;
       overscroll-behavior-x: contain;
       -webkit-overflow-scrolling: touch;
@@ -318,7 +349,7 @@
     }
 
     .deck-scroller::-webkit-scrollbar {
-      height: 6px;
+      height: 5px;
     }
 
     .deck-scroller::-webkit-scrollbar-thumb {
@@ -327,13 +358,13 @@
     }
 
     .tarot-card-back {
-      width: 132px;
-      height: 214px;
-      border-radius: 14px;
+      width: 114px;
+      height: 184px;
+      border-radius: 13px;
       background: linear-gradient(155deg, #354E41 0%, #24372D 100%);
       border: 2px solid #C5A87A;
-      box-shadow: 0 8px 20px rgba(36, 55, 45, 0.18);
-      flex-shrink: 0;
+      box-shadow: 0 6px 16px rgba(36, 55, 45, 0.16);
+      flex: 0 0 auto;
       scroll-snap-align: center;
       cursor: pointer;
       position: relative;
@@ -341,7 +372,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 10px;
+      padding: 14px 8px;
       user-select: none;
       transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
     }
@@ -349,21 +380,21 @@
     .tarot-card-back::before {
       content: "";
       position: absolute;
-      inset: 7px;
+      inset: 6px;
       border: 1px solid rgba(197, 168, 122, 0.42);
-      border-radius: 9px;
+      border-radius: 8px;
       pointer-events: none;
     }
 
     .back-num {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: #D7BE92;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
     }
 
     .back-eye-emblem {
-      width: 52px;
-      height: 52px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       border: 1px solid rgba(215, 190, 146, 0.55);
       display: flex;
@@ -373,9 +404,9 @@
     }
 
     .back-brand-text {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       color: rgba(215, 190, 146, 0.85);
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
     }
 
     .tarot-card-back.is-shuffling {
@@ -384,22 +415,23 @@
 
     @keyframes cardShufflePulse {
       0% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-12px) scale(0.97); }
+      50% { transform: translateY(-10px) scale(0.97); }
       100% { transform: translateY(0) scale(1); }
     }
 
     .deck-nav-controls {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      margin-top: 6px;
+      gap: 14px;
+      margin-top: 4px;
     }
 
     .nav-circle-btn {
-      width: 40px;
-      height: 40px;
-      min-height: 40px;
+      width: 38px;
+      height: 38px;
+      min-height: 38px;
       border-radius: 50%;
       background: #fff;
       border: 1px solid var(--sage-border);
@@ -409,20 +441,21 @@
       justify-content: center;
       cursor: pointer;
       font-size: 1rem;
+      flex-shrink: 0;
     }
 
     .nav-label {
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       color: var(--text-secondary);
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
     }
 
     /* === 畫面 3：今日身心療癒與芳療處方籤 === */
     .rx-sheet {
       width: 100%;
-      max-width: 920px;
+      max-width: 900px;
       background: var(--bg-surface);
-      border-radius: 24px;
+      border-radius: 20px;
       overflow: hidden;
       box-shadow: var(--shadow-elevated);
       border: 1px solid var(--sage-border);
@@ -431,21 +464,21 @@
     .rx-banner {
       background: linear-gradient(135deg, #324B3E 0%, #446353 100%);
       color: #fff;
-      padding: 20px 26px;
+      padding: 16px 20px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .rx-banner-title {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 1.02rem;
+      gap: 8px;
+      font-size: 0.96rem;
       font-weight: 500;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
     }
 
     .rx-banner-dot {
@@ -453,23 +486,24 @@
       height: 8px;
       border-radius: 50%;
       background: #D7BE92;
+      flex-shrink: 0;
     }
 
     .rx-banner-pill {
       background: rgba(255, 255, 255, 0.14);
       border: 1px solid rgba(255, 255, 255, 0.24);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 18px;
+      font-size: 0.76rem;
       color: #F3ECE0;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
     }
 
     .rx-grid {
       display: grid;
-      grid-template-columns: 280px minmax(0, 1fr);
-      gap: 28px;
-      padding: 28px;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 24px;
+      padding: 24px;
     }
 
     /* 左側抽出的塔羅牌面 */
@@ -480,13 +514,13 @@
     }
 
     .tarot-face-card {
-      width: 240px;
-      height: 368px;
-      border-radius: 18px;
+      width: 224px;
+      height: 344px;
+      border-radius: 16px;
       background: linear-gradient(170deg, #FCFBF8 0%, #F1EDE4 100%);
       border: 1.5px solid #D4C2A3;
       box-shadow: var(--shadow-card);
-      padding: 22px 16px;
+      padding: 20px 14px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -504,35 +538,35 @@
     .tarot-face-card::before {
       content: "";
       position: absolute;
-      inset: 9px;
+      inset: 8px;
       border: 1px solid rgba(184, 152, 106, 0.42);
-      border-radius: 12px;
+      border-radius: 11px;
       pointer-events: none;
     }
 
     .face-top-meta {
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     .face-en {
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
       color: var(--gold-warm);
       text-transform: uppercase;
       font-weight: 600;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .face-zh {
-      font-size: 1.55rem;
+      font-size: 1.45rem;
       font-weight: 600;
       color: var(--sage-deep);
       letter-spacing: 0.06em;
     }
 
     .face-symbol-ring {
-      width: 108px;
-      height: 108px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       background: rgba(229, 236, 231, 0.65);
       border: 1px solid rgba(184, 152, 106, 0.55);
@@ -543,34 +577,36 @@
     }
 
     .face-bottom-tag {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--sage-mid);
-      letter-spacing: 0.06em;
-      margin-bottom: 4px;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
     }
 
     .model-footnote {
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
       text-align: center;
       line-height: 1.5;
-      margin-top: 14px;
+      margin-top: 12px;
+      max-width: 240px;
     }
 
     /* 右側芳療處方內容 */
     .rx-details-col {
       min-width: 0;
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
     .rx-block-label {
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 600;
       color: var(--sage-deep);
-      letter-spacing: 0.06em;
-      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -580,11 +616,11 @@
       background: #F9F8F4;
       border-left: 3px solid var(--sage-mid);
       border-radius: 12px;
-      padding: 16px 18px;
-      font-size: 0.98rem;
-      line-height: 1.8;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      line-height: 1.75;
       color: var(--text-primary);
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       overflow-wrap: anywhere;
     }
 
@@ -592,18 +628,18 @@
       display: inline-block;
       background: var(--sage-deep);
       color: #fff;
-      font-size: 0.78rem;
-      padding: 5px 14px;
-      border-radius: 20px;
-      letter-spacing: 0.06em;
-      margin-bottom: 12px;
+      font-size: 0.76rem;
+      padding: 5px 13px;
+      border-radius: 18px;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
     }
 
     .oil-prescription-box {
       border: 1px solid var(--sage-border);
       background: #FAF9F6;
-      border-radius: 16px;
-      padding: 18px 20px;
+      border-radius: 14px;
+      padding: 16px 18px;
       margin-bottom: 14px;
       overflow-wrap: anywhere;
     }
@@ -614,11 +650,11 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .oil-title-row h4 {
-      font-size: 1.32rem;
+      font-size: 1.25rem;
       font-weight: 600;
       color: var(--sage-deep);
     }
@@ -626,24 +662,24 @@
     .formula-chip {
       background: var(--gold-pale);
       color: #826438;
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       font-weight: 600;
-      padding: 4px 12px;
-      border-radius: 16px;
+      padding: 4px 10px;
+      border-radius: 14px;
     }
 
     .oil-chem-desc {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-secondary);
-      line-height: 1.7;
+      line-height: 1.65;
     }
 
     /* 現場試聞氣味微調手風琴 */
     .swap-accordion {
       border: 1px solid var(--sage-border);
       background: #F6F4EE;
-      border-radius: 14px;
-      margin-bottom: 22px;
+      border-radius: 12px;
+      margin-bottom: 20px;
       overflow: hidden;
     }
 
@@ -651,12 +687,12 @@
       width: 100%;
       background: none;
       border: none;
-      padding: 13px 16px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      font-size: 0.86rem;
+      gap: 8px;
+      font-size: 0.84rem;
       font-weight: 600;
       color: var(--sage-deep);
       cursor: pointer;
@@ -665,7 +701,7 @@
 
     .swap-accordion-panel {
       display: none;
-      padding: 14px 16px 16px;
+      padding: 12px 14px 14px;
       background: #fff;
       border-top: 1px solid var(--sage-border);
     }
@@ -675,31 +711,31 @@
     }
 
     .swap-intro {
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       color: var(--text-secondary);
       line-height: 1.6;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .swap-chip-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 7px;
     }
 
     .swap-oil-chip {
       background: #F4F6F4;
       border: 1px solid var(--sage-border);
-      border-radius: 10px;
-      padding: 9px 14px;
-      font-size: 0.85rem;
+      border-radius: 9px;
+      padding: 8px 12px;
+      font-size: 0.83rem;
       color: var(--text-primary);
       font-weight: 500;
     }
 
     .rx-footer-actions {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
@@ -707,9 +743,9 @@
       background: #fff;
       border: 1px solid var(--sage-border);
       color: var(--sage-deep);
-      padding: 13px 24px;
-      border-radius: 30px;
-      font-size: 0.94rem;
+      padding: 12px 22px;
+      border-radius: 28px;
+      font-size: 0.92rem;
       font-weight: 500;
       cursor: pointer;
       display: inline-flex;
@@ -722,14 +758,15 @@
       width: 100%;
       max-width: 1140px;
       margin: 0 auto;
-      padding: 16px 24px 24px;
+      padding: 12px 16px 22px;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      gap: 8px;
-      font-size: 0.76rem;
+      gap: 6px 16px;
+      font-size: 0.74rem;
       color: var(--text-muted);
+      text-align: center;
     }
 
     /* 芳療師速查彈窗 */
@@ -742,7 +779,7 @@
       z-index: 100;
       align-items: center;
       justify-content: center;
-      padding: 14px;
+      padding: 12px;
     }
 
     .modal-overlay.open {
@@ -753,7 +790,7 @@
       background: #fff;
       width: min(100%, 880px);
       max-height: 88vh;
-      border-radius: 20px;
+      border-radius: 18px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -763,17 +800,17 @@
     .modal-top {
       background: var(--sage-deep);
       color: #fff;
-      padding: 16px 22px;
+      padding: 14px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .modal-top h3 {
-      font-size: 1.02rem;
+      font-size: 0.95rem;
       font-weight: 500;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
     }
 
     .modal-x {
@@ -793,10 +830,10 @@
 
     .m-tab {
       flex: 1;
-      padding: 12px 8px;
+      padding: 11px 6px;
       background: none;
       border: none;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       font-weight: 600;
       color: var(--text-secondary);
       cursor: pointer;
@@ -809,7 +846,7 @@
     }
 
     .modal-scroll-area {
-      padding: 20px;
+      padding: 16px;
       overflow-y: auto;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -819,53 +856,53 @@
     .quad-cards-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      gap: 12px;
     }
 
     .quad-item {
       background: #FAF9F6;
       border: 1px solid var(--sage-border);
-      border-radius: 14px;
-      padding: 16px;
+      border-radius: 12px;
+      padding: 14px;
     }
 
     .quad-item h4 {
       color: var(--sage-deep);
-      font-size: 0.98rem;
-      margin-bottom: 6px;
+      font-size: 0.94rem;
+      margin-bottom: 5px;
     }
 
     .quad-item .chem-tag {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--gold-warm);
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .quad-item p {
-      font-size: 0.85rem;
+      font-size: 0.83rem;
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
     .filter-input {
       width: 100%;
-      padding: 11px 14px;
+      padding: 10px 12px;
       border: 1px solid var(--sage-border);
       border-radius: 10px;
-      margin-bottom: 14px;
-      font-size: 0.92rem;
+      margin-bottom: 12px;
+      font-size: 16px;
     }
 
     .ref-table {
       width: 100%;
-      min-width: 520px;
+      min-width: 480px;
       border-collapse: collapse;
-      font-size: 0.85rem;
+      font-size: 0.83rem;
     }
 
     .ref-table th, .ref-table td {
-      padding: 10px 8px;
+      padding: 9px 7px;
       text-align: left;
       border-bottom: 1px solid var(--sage-border);
     }
@@ -881,94 +918,34 @@
       background: var(--sage-soft);
       color: var(--sage-deep);
       border: none;
-      padding: 6px 12px;
+      padding: 6px 11px;
       border-radius: 12px;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 500;
       cursor: pointer;
     }
 
     /* =====================================
-       響應式設計 RWD（平板 / 手機 / 桌機）
+       響應式設計 RWD（平板 / 手機 / 窄外框）
     ===================================== */
-    @media screen and (min-width: 768px) and (max-width: 1023px) {
-      header { padding: 16px 20px; }
-      .rx-grid {
-        grid-template-columns: 230px minmax(0, 1fr);
-        gap: 20px;
-        padding: 22px;
-      }
-      .tarot-face-card {
-        width: 210px;
-        height: 325px;
+    @media screen and (min-width: 768px) {
+      .tarot-card-back {
+        width: 132px;
+        height: 214px;
       }
     }
 
     @media screen and (max-width: 767px) {
-      header {
-        padding: 12px 14px;
-      }
-      .brand-emblem {
-        width: 36px;
-        height: 36px;
-      }
-      .brand-titles .zh-title {
-        font-size: 0.95rem;
-      }
-      .brand-titles .en-subtitle {
-        font-size: 0.58rem;
-        letter-spacing: 0.08em;
-      }
-      .btn-ref {
-        font-size: 0.76rem;
-        padding: 7px 12px;
-      }
-      main {
-        padding: 10px 12px 28px;
-        justify-content: flex-start;
-      }
-      .welcome-heading {
-        font-size: clamp(1.45rem, 6vw, 1.8rem);
-      }
-      .welcome-copy {
-        font-size: 0.92rem;
-      }
-      .deck-header h2 {
-        font-size: 1.22rem;
-      }
-      .deck-toolbar {
-        width: 100%;
-      }
-      .deck-toolbar button, .pill-hint {
-        flex: 1;
-        min-width: 140px;
-        justify-content: center;
-        font-size: 0.8rem;
-      }
-      .deck-scroller {
-        padding: 16px 14px 24px;
-        gap: 12px;
-      }
-      .tarot-card-back {
-        width: 112px;
-        height: 182px;
-      }
-      .rx-banner {
-        padding: 16px 18px;
-      }
       .rx-grid {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 22px;
-        padding: 20px 16px;
+        gap: 20px;
+        padding: 18px 14px;
       }
       .tarot-face-card {
-        width: 216px;
-        height: 332px;
-      }
-      .rx-details-col {
-        width: 100%;
+        width: 208px;
+        height: 320px;
       }
       .rx-footer-actions {
         flex-direction: column;
@@ -979,13 +956,6 @@
       .quad-cards-grid {
         grid-template-columns: 1fr;
       }
-      .filter-input {
-        font-size: 16px;
-      }
-      footer {
-        justify-content: center;
-        text-align: center;
-      }
     }
 
     @media screen and (max-width: 420px) {
@@ -993,6 +963,12 @@
         display: none;
       }
       .btn-sage-solid {
+        width: 100%;
+      }
+      .deck-toolbar {
+        flex-direction: column;
+      }
+      .deck-toolbar button, .pill-hint {
         width: 100%;
       }
     }
@@ -1026,143 +1002,144 @@
   </style>
 </head>
 <body>
-
-  <!-- 頂部品牌導覽 -->
-  <header>
-    <div class="brand-group">
-      <div class="brand-emblem" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-        </svg>
-      </div>
-      <div class="brand-titles">
-        <span class="zh-title">森呼吸芳療塔羅</span>
-        <span class="en-subtitle">BOTANICAL TAROT &amp; AROMATHERAPY</span>
-      </div>
-    </div>
-    <button class="btn-ref" onclick="openRefModal()">
-      <span>📋 芳療師速查表</span>
-    </button>
-  </header>
-
-  <main>
-    <!-- 畫面 1：靜心迎賓 -->
-    <section id="view-welcome" class="view-section active">
-      <div class="welcome-card">
-        <div class="breath-orb-container">
-          <div class="breath-aura"></div>
-          <div class="breath-aura-inner"></div>
-          <div class="breath-center">深呼吸</div>
+  <div class="app-shell">
+    <!-- 頂部品牌導覽 -->
+    <header>
+      <div class="brand-group">
+        <div class="brand-emblem" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+          </svg>
         </div>
-        <div class="eyebrow-tag">Aromatherapy × Tarot Ritual</div>
-        <h1 class="welcome-heading">傾聽身體的聲音<br>尋找今日的命定香氣</h1>
-        <p class="welcome-copy">
-          請先喝一口溫熱的迎賓茶，輕輕閉上眼睛深呼吸三次。<br>
-          在心中默想：<strong>「我現在的身心，最需要什麼樣的照顧？」</strong><br>
-          準備好後，憑直覺為自己抽取一張專屬處方牌。
-        </p>
-        <button class="btn-sage-solid" onclick="showDrawView()">開始直覺選牌</button>
+        <div class="brand-titles">
+          <span class="zh-title">森呼吸芳療塔羅</span>
+          <span class="en-subtitle">BOTANICAL TAROT &amp; AROMATHERAPY</span>
+        </div>
       </div>
-    </section>
+      <button class="btn-ref" onclick="openRefModal()">
+        <span>📋 芳療師速查表</span>
+      </button>
+    </header>
 
-    <!-- 畫面 2：78 張橫向滑動牌陣 -->
-    <section id="view-draw" class="view-section">
-      <div class="deck-header">
-        <div class="eyebrow-tag">78 TAROT CARDS</div>
-        <h2>左右滑動牌陣，憑直覺點選一張吸引你的牌</h2>
-        <p>共 78 張完整牌庫已為您展開，點擊任一張牌背即可翻開今日處方</p>
-      </div>
-
-      <div class="deck-toolbar">
-        <button class="btn-ref" onclick="triggerShuffle()">🔀 重新洗牌</button>
-        <div class="pill-hint">提示：可左右滑動瀏覽整副牌</div>
-      </div>
-
-      <div class="deck-carousel-wrap">
-        <div class="deck-scroller" id="deck-scroller"></div>
-      </div>
-
-      <div class="deck-nav-controls">
-        <button class="nav-circle-btn" onclick="scrollDeckBy(-280)" aria-label="向左滑動">‹</button>
-        <span class="nav-label">滑動挑選您的命定牌卡</span>
-        <button class="nav-circle-btn" onclick="scrollDeckBy(280)" aria-label="向右滑動">›</button>
-      </div>
-    </section>
-
-    <!-- 畫面 3：今日身心療癒與芳療處方籤 -->
-    <section id="view-result" class="view-section">
-      <div class="rx-sheet">
-        <div class="rx-banner">
-          <div class="rx-banner-title">
-            <span class="rx-banner-dot"></span>
-            <span>今日身心療癒與芳療處方籤</span>
+    <main>
+      <!-- 畫面 1：靜心迎賓 -->
+      <section id="view-welcome" class="view-section active">
+        <div class="welcome-card">
+          <div class="breath-orb-container">
+            <div class="breath-aura"></div>
+            <div class="breath-aura-inner"></div>
+            <div class="breath-center">深呼吸</div>
           </div>
-          <div class="rx-banner-pill" id="rx-header-pill">小阿爾克那｜精準調理單方</div>
+          <div class="eyebrow-tag">Aromatherapy × Tarot Ritual</div>
+          <h1 class="welcome-heading">傾聽身體的聲音<br>尋找今日的命定香氣</h1>
+          <p class="welcome-copy">
+            請先喝一口溫熱的迎賓茶，輕輕閉上眼睛深呼吸三次。<br>
+            在心中默想：<strong>「我現在的身心，最需要什麼樣的照顧？」</strong><br>
+            準備好後，憑直覺為自己抽取一張專屬處方牌。
+          </p>
+          <button class="btn-sage-solid" onclick="showDrawView()">開始直覺選牌</button>
+        </div>
+      </section>
+
+      <!-- 畫面 2：78 張橫向滑動牌陣 -->
+      <section id="view-draw" class="view-section">
+        <div class="deck-header">
+          <div class="eyebrow-tag">78 TAROT CARDS</div>
+          <h2>左右滑動牌陣，憑直覺點選一張吸引你的牌</h2>
+          <p>共 78 張完整牌庫已為您展開，點擊任一張牌背即可翻開今日處方</p>
         </div>
 
-        <div class="rx-grid">
-          <!-- 左側抽出的塔羅牌視覺 -->
-          <div class="card-stage">
-            <div class="tarot-face-card" id="tarot-face-card">
-              <div class="face-top-meta">
-                <div class="face-en" id="face-en">ACE OF CUPS</div>
-                <div class="face-zh" id="face-zh">聖杯 Ace</div>
-              </div>
-              <div class="face-symbol-ring" id="face-symbol"></div>
-              <div class="face-bottom-tag" id="face-element-tag">水元素・心輪溫柔敞開</div>
+        <div class="deck-toolbar">
+          <button class="btn-ref" onclick="triggerShuffle()">🔀 重新洗牌</button>
+          <div class="pill-hint">提示：可左右滑動瀏覽整副牌</div>
+        </div>
+
+        <div class="deck-carousel-wrap">
+          <div class="deck-scroller" id="deck-scroller"></div>
+        </div>
+
+        <div class="deck-nav-controls">
+          <button class="nav-circle-btn" onclick="scrollDeckBy(-250)" aria-label="向左滑動">‹</button>
+          <span class="nav-label">滑動挑選您的命定牌卡</span>
+          <button class="nav-circle-btn" onclick="scrollDeckBy(250)" aria-label="向右滑動">›</button>
+        </div>
+      </section>
+
+      <!-- 畫面 3：今日身心療癒與芳療處方籤 -->
+      <section id="view-result" class="view-section">
+        <div class="rx-sheet">
+          <div class="rx-banner">
+            <div class="rx-banner-title">
+              <span class="rx-banner-dot"></span>
+              <span>今日身心療癒與芳療處方籤</span>
             </div>
-            <div class="model-footnote">
-              此處方依據法系芳療《L'Aromathérapie Exactement》四象限化學模型匹配
-            </div>
+            <div class="rx-banner-pill" id="rx-header-pill">小阿爾克那｜精準調理單方</div>
           </div>
 
-          <!-- 右側芳療解讀與配方 -->
-          <div class="rx-details-col">
-            <div>
-              <div class="rx-block-label">✦ 當下身心狀態解讀</div>
-              <div class="rx-state-box" id="rx-reading-text"></div>
-
-              <div class="rx-block-label">💧 今日命定精油配方</div>
-              <div class="quadrant-pill" id="rx-quadrant-pill">淋巴型・水象限</div>
-
-              <div class="oil-prescription-box">
-                <div class="oil-title-row">
-                  <h4 id="rx-oil-name">佛手柑</h4>
-                  <span class="formula-chip" id="rx-formula-chip">單方精油調理</span>
+          <div class="rx-grid">
+            <!-- 左側抽出的塔羅牌視覺 -->
+            <div class="card-stage">
+              <div class="tarot-face-card" id="tarot-face-card">
+                <div class="face-top-meta">
+                  <div class="face-en" id="face-en">ACE OF CUPS</div>
+                  <div class="face-zh" id="face-zh">聖杯 Ace</div>
                 </div>
-                <div class="oil-chem-desc" id="rx-chem-desc"></div>
+                <div class="face-symbol-ring" id="face-symbol"></div>
+                <div class="face-bottom-tag" id="face-element-tag">水元素・心輪溫柔敞開</div>
               </div>
-
-              <!-- 現場試聞氣味微調手風琴 -->
-              <div class="swap-accordion">
-                <button class="swap-accordion-btn" onclick="toggleSwapPanel()">
-                  <span>＋ 現場試聞氣味微調（同象限替換建議）</span>
-                  <span id="swap-chevron">⌄</span>
-                </button>
-                <div class="swap-accordion-panel" id="swap-panel">
-                  <p class="swap-intro">
-                    若現場試聞後想微調香氣，可隨時請芳療師為您更換以下<strong>同象限・同等療癒頻率</strong>的精油：
-                  </p>
-                  <div class="swap-chip-list" id="swap-chip-list"></div>
-                </div>
+              <div class="model-footnote">
+                此處方依據法系芳療《L'Aromathérapie Exactement》四象限化學模型匹配
               </div>
             </div>
 
-            <div class="rx-footer-actions">
-              <button class="btn-sage-solid" onclick="showDrawView()">↻ 重新為下一位客人抽牌</button>
-              <button class="btn-outline-sage" onclick="showDrawView()">返回牌陣重選</button>
+            <!-- 右側芳療解讀與配方 -->
+            <div class="rx-details-col">
+              <div>
+                <div class="rx-block-label">✦ 當下身心狀態解讀</div>
+                <div class="rx-state-box" id="rx-reading-text"></div>
+
+                <div class="rx-block-label">💧 今日命定精油配方</div>
+                <div class="quadrant-pill" id="rx-quadrant-pill">淋巴型・水象限</div>
+
+                <div class="oil-prescription-box">
+                  <div class="oil-title-row">
+                    <h4 id="rx-oil-name">佛手柑</h4>
+                    <span class="formula-chip" id="rx-formula-chip">單方精油調理</span>
+                  </div>
+                  <div class="oil-chem-desc" id="rx-chem-desc"></div>
+                </div>
+
+                <!-- 現場試聞氣味微調手風琴 -->
+                <div class="swap-accordion">
+                  <button class="swap-accordion-btn" onclick="toggleSwapPanel()">
+                    <span>＋ 現場試聞氣味微調（同象限替換建議）</span>
+                    <span id="swap-chevron">⌄</span>
+                  </button>
+                  <div class="swap-accordion-panel" id="swap-panel">
+                    <p class="swap-intro">
+                      若現場試聞後想微調香氣，可隨時請芳療師為您更換以下<strong>同象限・同等療癒頻率</strong>的精油：
+                    </p>
+                    <div class="swap-chip-list" id="swap-chip-list"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="rx-footer-actions">
+                <button class="btn-sage-solid" onclick="showDrawView()">↻ 重新為下一位客人抽牌</button>
+                <button class="btn-outline-sage" onclick="showDrawView()">返回牌陣重選</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
 
-  <footer>
-    <span>森呼吸芳療按摩工作室專屬系統</span>
-    <span>78 張完整塔羅與法系芳療官能基對照</span>
-  </footer>
+    <footer>
+      <span>森呼吸芳療按摩工作室專屬系統</span>
+      <span>78 張完整塔羅與法系芳療官能基對照</span>
+    </footer>
+  </div>
 
   <!-- 芳療師速查表彈窗 -->
   <div class="modal-overlay" id="ref-modal" onclick="handleModalBackdrop(event)">
@@ -1221,16 +1198,14 @@
   </div>
 
   <script>
-    // 極簡線條 SVG 圖示集（取代生硬 Emoji，還原植物手繪質感）
     const SYMBOLS_SVG = {
-      major: `<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`,
-      wands: `<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c.5 3.5-2 5.5-2 8.5a4 4 0 0 0 8 0c0-2.5-1.5-4.5-3-6.5-.5 2-1.5 3-3 3Z"/><path d="M12 14v8M9 18h6"/></svg>`,
-      cups: `<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-1.5 2-3 3.5-3 5a3 3 0 0 0 6 0c0-1.5-1.5-3-3-5Z" stroke="#B8986A"/><path d="M7 11h10l-1 4a4 4 0 0 1-8 0l-1-4Z"/><path d="M12 19v3M8 22h8"/></svg>`,
-      swords: `<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>`,
-      pentacles: `<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
+      major: `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`,
+      wands: `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c.5 3.5-2 5.5-2 8.5a4 4 0 0 0 8 0c0-2.5-1.5-4.5-3-6.5-.5 2-1.5 3-3 3Z"/><path d="M12 14v8M9 18h6"/></svg>`,
+      cups: `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-1.5 2-3 3.5-3 5a3 3 0 0 0 6 0c0-1.5-1.5-3-3-5Z" stroke="#B8986A"/><path d="M7 11h10l-1 4a4 4 0 0 1-8 0l-1-4Z"/><path d="M12 19v3M8 22h8"/></svg>`,
+      swords: `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>`,
+      pentacles: `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
     };
 
-    // 同象限精油替換膠囊清單
     const QUADRANT_SWAPS = {
       "神經型・土象限": [
         "大西洋雪松（倍半萜烯｜深層鬆肌與循環）",
@@ -1265,9 +1240,7 @@
       ]
     };
 
-    // 完整 78 張塔羅牌資料庫（22大牌複方 + 56小牌單方）
     const TAROT_DECK = [
-      // === 22 張大阿爾克那（複方） ===
       { id: 0, name: "0. 愚人", en: "THE FOOL", isMajor: true, symbol: "major", elementTag: "風元素・輕盈新生", quadrant: "膽汁型・乾火象限",
         reading: "你的靈魂正渴望一場輕盈的呼吸。近期可能背負了太多「應該」，身體需要卸下重擔，找回純粹的自由與彈性。",
         oil: "甜橙 ＋ 澳洲尤加利",
@@ -1569,7 +1542,7 @@
         el.innerHTML = `
           <div class="back-num">✦ ${numStr} ✦</div>
           <div class="back-eye-emblem">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
               <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/>
               <circle cx="12" cy="12" r="2.5"/>
             </svg>
@@ -1594,32 +1567,27 @@
     }
 
     function openPrescription(card) {
-      // 頂部橫幅標籤
       document.getElementById("rx-header-pill").textContent = card.isMajor
         ? "大阿爾克那｜深層調理複方"
         : "小阿爾克那｜精準調理單方";
 
-      // 左側塔羅牌面
       document.getElementById("face-en").textContent = card.en;
       document.getElementById("face-zh").textContent = card.name;
       document.getElementById("face-symbol").innerHTML = SYMBOLS_SVG[card.symbol] || SYMBOLS_SVG.major;
       document.getElementById("face-element-tag").textContent = card.elementTag;
 
-      // 右側處方內容
       document.getElementById("rx-reading-text").textContent = card.reading;
       document.getElementById("rx-quadrant-pill").textContent = card.quadrant;
       document.getElementById("rx-oil-name").textContent = card.oil;
       document.getElementById("rx-formula-chip").textContent = card.isMajor ? "深層複方調理" : "單方精油調理";
       document.getElementById("rx-chem-desc").textContent = card.chem;
 
-      // 填充同象限替換建議
       const swapList = QUADRANT_SWAPS[card.quadrant] || QUADRANT_SWAPS["全象限深度調和"];
       const chipContainer = document.getElementById("swap-chip-list");
       chipContainer.innerHTML = swapList.map(item => `<div class="swap-oil-chip">${item}</div>`).join("");
       document.getElementById("swap-panel").classList.remove("open");
       document.getElementById("swap-chevron").textContent = "⌄";
 
-      // 重播翻牌動畫
       const faceCard = document.getElementById("tarot-face-card");
       faceCard.style.animation = "none";
       faceCard.offsetHeight;
@@ -1634,7 +1602,6 @@
       document.getElementById("swap-chevron").textContent = isOpen ? "⌃" : "⌄";
     }
 
-    // 芳療師速查表控制
     function openRefModal() {
       renderRefTable();
       document.getElementById("ref-modal").classList.add("open");
