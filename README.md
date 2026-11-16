@@ -1,5 +1,425 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+/* =====================================
+   森呼吸・塔羅芳療
+   Responsive Design RWD
+   手機 / 平板 / 桌機
+===================================== */
+
+/* 全裝置基礎設定 */
+
+html {
+    width: 100%;
+    min-height: 100%;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    width: 100%;
+    min-width: 320px;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+button {
+    min-height: 42px;
+    touch-action: manipulation;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 主內容區 */
+
+main {
+    width: 100%;
+    max-width: 1200px;
+    padding-left: clamp(12px, 3vw, 32px);
+    padding-right: clamp(12px, 3vw, 32px);
+}
+
+/* 頂部導覽 */
+
+header {
+    width: 100%;
+    max-width: 1200px;
+    gap: 12px;
+}
+
+.brand {
+    white-space: nowrap;
+}
+
+.btn-ghost {
+    white-space: normal;
+    justify-content: center;
+}
+
+/* 抽牌區 */
+
+.cards-rail-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+}
+
+.tarot-back {
+    scroll-snap-align: center;
+    flex-shrink: 0;
+}
+
+/* 結果區 */
+
+.result-container {
+    width: 100%;
+    max-width: 1100px;
+    grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
+}
+
+.prescription-content {
+    min-width: 0;
+}
+
+.rx-reading {
+    overflow-wrap: anywhere;
+}
+
+.oil-card {
+    overflow-wrap: anywhere;
+}
+
+/* 速查表 */
+
+.modal-box {
+    width: min(100%, 900px);
+}
+
+.modal-body {
+    min-width: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.db-table {
+    min-width: 540px;
+}
+
+.quadrant-grid {
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+}
+
+/* 平板：768px～1023px */
+
+@media screen and (min-width: 768px)
+and (max-width: 1023px) {
+
+    header {
+        padding: 16px 20px;
+    }
+
+    main {
+        padding-top: 24px;
+    }
+
+    .result-container {
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 20px;
+        padding: 24px;
+    }
+
+    .revealed-card {
+        width: 200px;
+        height: 310px;
+    }
+
+    .quadrant-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tarot-back {
+        width: 96px;
+        height: 160px;
+        margin-left: -40px;
+    }
+}
+
+/* 手機：767px 以下 */
+
+@media screen and (max-width: 767px) {
+
+    header {
+        padding: 12px 14px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .brand {
+        font-size: 0.95rem;
+    }
+
+    header .btn-ghost {
+        font-size: 0.75rem;
+        padding: 8px 10px;
+    }
+
+    main {
+        padding: 12px 12px 28px;
+        justify-content: flex-start;
+    }
+
+    .welcome-box {
+        padding: 20px 8px;
+    }
+
+    .welcome-title {
+        font-size: clamp(1.45rem, 6vw, 1.85rem);
+    }
+
+    .welcome-desc {
+        font-size: 0.92rem;
+    }
+
+    .breath-circle-wrap {
+        width: 125px;
+        height: 125px;
+    }
+
+    .breath-core {
+        width: 72px;
+        height: 72px;
+        font-size: 0.82rem;
+    }
+
+    .draw-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .draw-header p {
+        font-size: 0.82rem;
+        line-height: 1.6;
+    }
+
+    .deck-controls {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .deck-controls button {
+        flex: 1;
+        min-width: 135px;
+        font-size: 0.82rem;
+        padding: 9px;
+    }
+
+    .deck-scroll-hint {
+        font-size: 0.75rem;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .cards-rail-wrapper {
+        padding: 24px 12px 30px;
+    }
+
+    .cards-rail {
+        padding: 0 12px;
+    }
+
+    .tarot-back {
+        width: 88px;
+        height: 145px;
+        margin-left: -34px;
+        border-radius: 10px;
+    }
+
+    .tarot-back-motif {
+        width: 34px;
+        height: 34px;
+    }
+
+    /* 結果處方改成上下排列 */
+
+    .result-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        padding: 22px 14px;
+        border-radius: 18px;
+    }
+
+    .revealed-card {
+        width: 190px;
+        height: 295px;
+    }
+
+    .card-emblem {
+        width: 82px;
+        height: 82px;
+    }
+
+    .prescription-content {
+        width: 100%;
+    }
+
+    .rx-reading {
+        font-size: 0.95rem;
+        padding: 14px;
+    }
+
+    .oil-card {
+        padding: 17px;
+    }
+
+    .oil-name {
+        font-size: 1.25rem;
+    }
+
+    .action-row {
+        flex-direction: column;
+    }
+
+    .action-row button {
+        width: 100%;
+    }
+
+    /* 彈出視窗 */
+
+    .modal-backdrop {
+        padding: 8px;
+        align-items: center;
+    }
+
+    .modal-box {
+        width: 100%;
+        max-height: 92vh;
+        border-radius: 16px;
+    }
+
+    .modal-header {
+        padding: 14px;
+    }
+
+    .modal-header h3 {
+        font-size: 0.88rem;
+        line-height: 1.5;
+    }
+
+    .modal-tabs {
+        flex-wrap: wrap;
+    }
+
+    .modal-tab {
+        font-size: 0.78rem;
+        padding: 12px 5px;
+    }
+
+    .modal-body {
+        padding: 14px;
+    }
+
+    .quadrant-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .q-card {
+        padding: 14px;
+    }
+
+    .search-input {
+        font-size: 16px;
+    }
+}
+
+/* 小尺寸手機：480px 以下 */
+
+@media screen and (max-width: 480px) {
+
+    header {
+        align-items: flex-start;
+    }
+
+    .brand {
+        font-size: 0.85rem;
+    }
+
+    header .btn-ghost {
+        max-width: 155px;
+    }
+
+    .welcome-title {
+        font-size: 1.45rem;
+    }
+
+    .welcome-desc {
+        font-size: 0.88rem;
+        line-height: 1.8;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 15px 20px;
+    }
+
+    .tarot-back {
+        width: 80px;
+        height: 132px;
+        margin-left: -30px;
+    }
+
+    .result-container {
+        padding: 18px 12px;
+    }
+
+    .revealed-card {
+        width: 180px;
+        height: 280px;
+    }
+
+    .rx-badge-row {
+        gap: 6px;
+    }
+
+    .badge {
+        font-size: 0.72rem;
+    }
+
+    .oil-chemistry {
+        font-size: 0.82rem;
+    }
+}
+
+/* 電腦滑鼠效果 */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .tarot-back:hover {
+        transform: translateY(-18px) scale(1.04);
+    }
+
+    button:hover {
+        transition: all 0.2s ease;
+    }
+}
+
+/* 減少動態效果：照顧對動畫敏感的使用者 */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
