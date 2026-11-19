@@ -6,6 +6,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="森呼吸芳療塔羅" />
   <title>森呼吸芳療塔羅｜BOTANICAL TAROT & AROMATHERAPY</title>
+
+  <!-- LINE / Facebook / 社群傳網址自動顯示預覽圖卡設定 -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="森呼吸芳療塔羅｜專屬身心與精油處方籤" />
+  <meta property="og:description" content="靜心深呼吸，憑直覺抽取今日的命定塔羅牌，為您調配專屬的法系芳療與植萃精油配方。" />
+  <!-- 請在 GitHub 倉庫上傳一張名為 cover.jpg 的封面圖，並將下方網址改為你的實際網址 -->
+  <meta property="og:image" content="https://a90141561415.github.io/Ys/cover.jpg" />
+  <meta property="og:url" content="https://a90141561415.github.io/Ys/" />
+
   <style>
     :root {
       --bg-cream: #F6F4EE;
@@ -79,6 +88,7 @@
       gap: 10px;
       min-width: 0;
       flex: 1;
+      cursor: pointer;
     }
 
     .brand-emblem {
@@ -1034,9 +1044,9 @@
 </head>
 <body>
   <div class="app-shell">
-    <!-- 頂部品牌導覽 -->
+    <!-- 頂部品牌導覽（點擊品牌標誌亦可回到迎賓首頁） -->
     <header>
-      <div class="brand-group">
+      <div class="brand-group" onclick="resetForNextGuest()" title="回到迎賓首頁">
         <div class="brand-emblem" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
@@ -1165,8 +1175,9 @@
                 </div>
               </div>
 
+              <!-- 修正：下一位客人直接跳轉回靜心迎賓首頁 -->
               <div class="rx-footer-actions">
-                <button class="btn-sage-solid" onclick="showDrawView()">↻ 重新為下一位客人抽牌</button>
+                <button class="btn-sage-solid" onclick="resetForNextGuest()">↻ 下一位客人（回到靜心迎賓）</button>
                 <button class="btn-outline-sage" onclick="showDrawView()">返回牌陣重選</button>
               </div>
             </div>
@@ -1247,7 +1258,6 @@
       pentacles: `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
     };
 
-    // 芳療家（Florihana）3 款核心基底油設定
     const CARRIER_PRESETS = {
       almond: {
         name: "甜杏仁油 20ml（主力滑順推拿）",
@@ -1579,6 +1589,14 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
+    // 下一位客人：重新洗牌並跳轉回最初始的「靜心迎賓首頁」
+    function resetForNextGuest() {
+      shuffleCards(activeDeck);
+      document.getElementById("swap-panel").classList.remove("open");
+      document.getElementById("swap-chevron").textContent = "⌄";
+      switchView("view-welcome");
+    }
+
     function shuffleCards(list) {
       for (let i = list.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -1646,7 +1664,6 @@
       document.getElementById("rx-formula-chip").textContent = card.isMajor ? "深層複方調理" : "單方精油調理";
       document.getElementById("rx-chem-desc").textContent = card.chem;
 
-      // 帶入建議基底油與現場滴數
       const carrierInfo = CARRIER_PRESETS[card.carrier] || CARRIER_PRESETS.almond;
       document.getElementById("rx-carrier-name").textContent = `🧴 建議基底油：${carrierInfo.name}`;
       document.getElementById("rx-carrier-drops").textContent = card.isMajor ? carrierInfo.dropsMajor : carrierInfo.dropsMinor;
