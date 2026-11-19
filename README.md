@@ -4,38 +4,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="森呼吸芳療塔羅" />
-  <title>森呼吸芳療塔羅｜BOTANICAL TAROT & AROMATHERAPY</title>
+  <meta name="apple-mobile-web-app-title" content="森心養生" />
+  <title>森心養生 SENXIN YANGSHENG｜塔羅芳療身心處方籤</title>
 
-  <!-- LINE / Facebook / 社群傳網址自動顯示預覽圖卡設定 -->
+  <!-- Open Graph 社交分享圖卡設定（傳 LINE / FB 自動顯示預覽卡片） -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="森呼吸芳療塔羅｜專屬身心與精油處方籤" />
+  <meta property="og:title" content="森心養生 SENXIN YANGSHENG｜塔羅芳療身心處方籤" />
   <meta property="og:description" content="靜心深呼吸，憑直覺抽取今日的命定塔羅牌，為您調配專屬的法系芳療與植萃精油配方。" />
-  <!-- 請在 GitHub 倉庫上傳一張名為 cover.jpg 的封面圖，並將下方網址改為你的實際網址 -->
+  <!-- 請在 GitHub 倉庫上傳品牌 LOGO 圖檔並命名為 cover.jpg -->
   <meta property="og:image" content="https://a90141561415.github.io/Ys/cover.jpg" />
   <meta property="og:url" content="https://a90141561415.github.io/Ys/" />
 
+  <!-- 載入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 載入 Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sage: {
+              deep: '#2F663C',   /* 品牌 LOGO 森林深綠 */
+              dark: '#224C2C',   /* 牌背與深色強調綠 */
+              mid: '#467D53',
+              soft: '#E6EFE8',
+              border: '#C8D9CC',
+            },
+            cream: {
+              base: '#F7F4ED',   /* 品牌 LOGO 暖米白底色 */
+              card: '#FAF8F3',
+              warm: '#FBF7EE',
+            },
+            gold: {
+              warm: '#E5B24C',   /* 品牌 LOGO 暖金放射光芒色 */
+              muted: '#C8A45D',
+              pale: '#F5EBD6',
+              dark: '#8A6728',
+            },
+            ink: {
+              main: '#243328',
+              sub: '#5A6B5E',
+              muted: '#86968A',
+            }
+          },
+          fontFamily: {
+            sans: ['"Noto Sans TC"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            serif: ['"Noto Serif TC"', 'serif'],
+          }
+        }
+      }
+    };
+  </script>
   <style>
-    :root {
-      --bg-cream: #F6F4EE;
-      --bg-surface: #FFFFFF;
-      --sage-deep: #2B4236;
-      --sage-mid: #466656;
-      --sage-soft: #E5ECE7;
-      --sage-border: #D2DDD6;
-      --gold-warm: #B8986A;
-      --gold-pale: #F3ECE0;
-      --text-primary: #27302B;
-      --text-secondary: #636F68;
-      --text-muted: #8E9A93;
-      --shadow-elevated: 0 14px 36px rgba(43, 66, 54, 0.08);
-      --shadow-card: 0 10px 24px rgba(43, 66, 54, 0.14);
-    }
-
+    /* 基礎保護與防橫向溢出設定 */
     *, *::before, *::after {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -46,1218 +72,459 @@
       overflow-x: hidden !important;
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
-      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-      background-color: var(--bg-cream);
-      color: var(--text-primary);
+      background-color: #F7F4ED;
+      color: #243328;
     }
 
+    /* 外層保護殼：確保在各種手機/平板/內建 App 框架內完全貼合不溢出 */
     .app-shell {
       width: 100%;
-      max-width: 100%;
+      max-width: 100vw;
       min-height: 100vh;
       overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      background-color: var(--bg-cream);
+      background-color: #F7F4ED;
       background-image:
-        radial-gradient(circle at 10% 15%, rgba(70, 102, 86, 0.06) 0%, transparent 45%),
-        radial-gradient(circle at 90% 85%, rgba(184, 152, 106, 0.08) 0%, transparent 45%);
+        radial-gradient(circle at 12% 14%, rgba(47, 102, 60, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 88% 86%, rgba(229, 178, 76, 0.09) 0%, transparent 45%);
     }
 
-    button {
-      min-height: 40px;
-      touch-action: manipulation;
-      font-family: inherit;
+    /* 橫向牌陣捲軸美化 */
+    .no-scrollbar::-webkit-scrollbar {
+      height: 5px;
+    }
+    .no-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(47, 102, 60, 0.25);
+      border-radius: 9999px;
     }
 
-    header {
-      width: 100%;
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 14px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      z-index: 10;
+    /* 迎賓深呼吸圓環光暈動畫 */
+    @keyframes calmBreath {
+      0%, 100% { transform: scale(0.94); opacity: 0.65; }
+      50% { transform: scale(1.1); opacity: 1; }
     }
-
-    .brand-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-      flex: 1;
-      cursor: pointer;
-    }
-
-    .brand-emblem {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--sage-soft);
-      border: 1px solid var(--sage-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--sage-deep);
-      flex-shrink: 0;
-    }
-
-    .brand-titles {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-
-    .brand-titles .zh-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--sage-deep);
-      letter-spacing: 0.06em;
-      line-height: 1.25;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .brand-titles .en-subtitle {
-      font-size: 0.6rem;
-      color: var(--text-secondary);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-top: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .btn-ref {
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid var(--sage-border);
-      color: var(--sage-deep);
-      padding: 7px 13px;
-      border-radius: 22px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      flex-shrink: 0;
-      white-space: nowrap;
-      transition: all 0.2s ease;
-    }
-
-    main {
-      flex: 1;
-      width: 100%;
-      max-width: 1140px;
-      min-width: 0;
-      margin: 0 auto;
-      padding: 8px 14px 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .view-section {
-      display: none;
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      animation: gentleFade 0.45s ease forwards;
-    }
-
-    .view-section.active {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    @keyframes gentleFade {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* === 畫面 1：靜心迎賓 === */
-    .welcome-card {
-      text-align: center;
-      width: 100%;
-      max-width: 520px;
-      padding: 20px 10px;
-    }
-
-    .breath-orb-container {
-      position: relative;
-      width: 136px;
-      height: 136px;
-      margin: 0 auto 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .breath-aura {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(70, 102, 86, 0.18) 0%, rgba(70, 102, 86, 0.02) 70%);
+    .animate-breath {
       animation: calmBreath 6s ease-in-out infinite;
     }
-
-    .breath-aura-inner {
-      position: absolute;
-      inset: 14px;
-      border-radius: 50%;
-      border: 1px solid rgba(70, 102, 86, 0.28);
+    .animate-breath-delay {
       animation: calmBreath 6s ease-in-out infinite 0.5s;
     }
 
-    .breath-center {
-      width: 76px;
-      height: 76px;
-      border-radius: 50%;
-      background: var(--sage-deep);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.88rem;
-      letter-spacing: 0.12em;
-      box-shadow: 0 8px 24px rgba(43, 66, 54, 0.24);
-      z-index: 2;
-    }
-
-    @keyframes calmBreath {
-      0%, 100% { transform: scale(0.92); opacity: 0.72; }
-      50% { transform: scale(1.12); opacity: 1; }
-    }
-
-    .eyebrow-tag {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      color: var(--gold-warm);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .welcome-heading {
-      font-size: clamp(1.45rem, 5.5vw, 1.85rem);
-      font-weight: 600;
-      color: var(--sage-deep);
-      line-height: 1.4;
-      margin-bottom: 14px;
-      letter-spacing: 0.04em;
-    }
-
-    .welcome-copy {
-      font-size: 0.94rem;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 30px;
-    }
-
-    .btn-sage-solid {
-      background: var(--sage-deep);
-      color: #fff;
-      border: none;
-      padding: 14px 34px;
-      border-radius: 30px;
-      font-size: 0.98rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(43, 66, 54, 0.2);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all 0.25s ease;
-    }
-
-    .btn-sage-solid:active {
-      transform: scale(0.98);
-    }
-
-    /* === 畫面 2：78 張橫向滑動牌陣 === */
-    .deck-header {
-      text-align: center;
-      width: 100%;
-      max-width: 560px;
-      padding: 0 8px;
-      margin-bottom: 14px;
-    }
-
-    .deck-header h2 {
-      font-size: clamp(1.18rem, 4.5vw, 1.42rem);
-      font-weight: 600;
-      color: var(--sage-deep);
-      line-height: 1.45;
-      margin-bottom: 6px;
-    }
-
-    .deck-header p {
-      font-size: 0.84rem;
-      color: var(--text-secondary);
-      line-height: 1.55;
-    }
-
-    .deck-toolbar {
-      width: 100%;
-      max-width: 560px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
-      padding: 0 4px;
-    }
-
-    .pill-hint {
-      background: var(--gold-pale);
-      color: #7D6138;
-      padding: 7px 14px;
-      border-radius: 22px;
-      font-size: 0.8rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .deck-carousel-wrap {
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      overflow: hidden;
-      position: relative;
-      margin: 4px 0 12px;
-    }
-
-    .deck-scroller {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding: 16px 16px 24px;
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 12px;
-      scroll-snap-type: x proximity;
-      overscroll-behavior-x: contain;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: var(--sage-border) transparent;
-    }
-
-    .deck-scroller::-webkit-scrollbar {
-      height: 5px;
-    }
-
-    .deck-scroller::-webkit-scrollbar-thumb {
-      background: rgba(70, 102, 86, 0.25);
-      border-radius: 3px;
-    }
-
-    .tarot-card-back {
-      width: 114px;
-      height: 184px;
-      border-radius: 13px;
-      background: linear-gradient(155deg, #354E41 0%, #24372D 100%);
-      border: 2px solid #C5A87A;
-      box-shadow: 0 6px 16px rgba(36, 55, 45, 0.16);
-      flex: 0 0 auto;
-      scroll-snap-align: center;
-      cursor: pointer;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 8px;
-      user-select: none;
-      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
-    }
-
-    .tarot-card-back::before {
-      content: "";
-      position: absolute;
-      inset: 6px;
-      border: 1px solid rgba(197, 168, 122, 0.42);
-      border-radius: 8px;
-      pointer-events: none;
-    }
-
-    .back-num {
-      font-size: 0.7rem;
-      color: #D7BE92;
-      letter-spacing: 0.12em;
-    }
-
-    .back-eye-emblem {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      border: 1px solid rgba(215, 190, 146, 0.55);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #D7BE92;
-    }
-
-    .back-brand-text {
-      font-size: 0.72rem;
-      color: rgba(215, 190, 146, 0.85);
-      letter-spacing: 0.18em;
-    }
-
-    .tarot-card-back.is-shuffling {
-      animation: cardShufflePulse 0.45s ease-in-out;
-    }
-
+    /* 重新洗牌脈動動畫 */
     @keyframes cardShufflePulse {
       0% { transform: translateY(0) scale(1); }
       50% { transform: translateY(-10px) scale(0.97); }
       100% { transform: translateY(0) scale(1); }
     }
-
-    .deck-nav-controls {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 4px;
+    .is-shuffling {
+      animation: cardShufflePulse 0.45s ease-in-out;
     }
 
-    .nav-circle-btn {
-      width: 38px;
-      height: 38px;
-      min-height: 38px;
-      border-radius: 50%;
-      background: #fff;
-      border: 1px solid var(--sage-border);
-      color: var(--sage-deep);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
-    .nav-label {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      letter-spacing: 0.05em;
-    }
-
-    /* === 畫面 3：今日身心療癒與芳療處方籤 === */
-    .rx-sheet {
-      width: 100%;
-      max-width: 900px;
-      background: var(--bg-surface);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: var(--shadow-elevated);
-      border: 1px solid var(--sage-border);
-    }
-
-    .rx-banner {
-      background: linear-gradient(135deg, #324B3E 0%, #446353 100%);
-      color: #fff;
-      padding: 16px 20px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .rx-banner-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.96rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-    }
-
-    .rx-banner-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #D7BE92;
-      flex-shrink: 0;
-    }
-
-    .rx-banner-pill {
-      background: rgba(255, 255, 255, 0.14);
-      border: 1px solid rgba(255, 255, 255, 0.24);
-      padding: 5px 12px;
-      border-radius: 18px;
-      font-size: 0.76rem;
-      color: #F3ECE0;
-      letter-spacing: 0.05em;
-    }
-
-    .rx-grid {
-      display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
-      gap: 24px;
-      padding: 24px;
-    }
-
-    .card-stage {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .tarot-face-card {
-      width: 224px;
-      height: 344px;
-      border-radius: 16px;
-      background: linear-gradient(170deg, #FCFBF8 0%, #F1EDE4 100%);
-      border: 1.5px solid #D4C2A3;
-      box-shadow: var(--shadow-card);
-      padding: 20px 14px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      animation: revealFlip 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
+    /* 塔羅牌面翻轉揭曉動畫 */
     @keyframes revealFlip {
       0% { opacity: 0; transform: rotateY(75deg) scale(0.94); }
       100% { opacity: 1; transform: rotateY(0deg) scale(1); }
     }
-
-    .tarot-face-card::before {
-      content: "";
-      position: absolute;
-      inset: 8px;
-      border: 1px solid rgba(184, 152, 106, 0.42);
-      border-radius: 11px;
-      pointer-events: none;
+    .animate-reveal {
+      animation: revealFlip 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    .face-top-meta {
-      margin-top: 2px;
-    }
-
-    .face-en {
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
-      color: var(--gold-warm);
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .face-zh {
-      font-size: 1.45rem;
-      font-weight: 600;
-      color: var(--sage-deep);
-      letter-spacing: 0.06em;
-    }
-
-    .face-symbol-ring {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: rgba(229, 236, 231, 0.65);
-      border: 1px solid rgba(184, 152, 106, 0.55);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--sage-deep);
-    }
-
-    .face-bottom-tag {
-      font-size: 0.78rem;
-      color: var(--sage-mid);
-      letter-spacing: 0.05em;
-      margin-bottom: 2px;
-    }
-
-    .model-footnote {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-      text-align: center;
-      line-height: 1.5;
-      margin-top: 12px;
-      max-width: 240px;
-    }
-
-    .rx-details-col {
-      min-width: 0;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .rx-block-label {
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: var(--sage-deep);
-      letter-spacing: 0.05em;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .rx-state-box {
-      background: #F9F8F4;
-      border-left: 3px solid var(--sage-mid);
-      border-radius: 12px;
-      padding: 14px 16px;
-      font-size: 0.95rem;
-      line-height: 1.75;
-      color: var(--text-primary);
-      margin-bottom: 18px;
-      overflow-wrap: anywhere;
-    }
-
-    .quadrant-pill {
-      display: inline-block;
-      background: var(--sage-deep);
-      color: #fff;
-      font-size: 0.76rem;
-      padding: 5px 13px;
-      border-radius: 18px;
-      letter-spacing: 0.05em;
-      margin-bottom: 10px;
-    }
-
-    .oil-prescription-box {
-      border: 1px solid var(--sage-border);
-      background: #FAF9F6;
-      border-radius: 14px;
-      padding: 16px 18px;
-      margin-bottom: 12px;
-      overflow-wrap: anywhere;
-    }
-
-    .oil-title-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .oil-title-row h4 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--sage-deep);
-    }
-
-    .formula-chip {
-      background: var(--gold-pale);
-      color: #826438;
-      font-size: 0.74rem;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 14px;
-    }
-
-    .oil-chem-desc {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    /* 基底油與滴數調配卡片 */
-    .carrier-oil-box {
-      border: 1px solid #DFD3BE;
-      background: #FBF8F3;
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 14px;
-      overflow-wrap: anywhere;
-    }
-
-    .carrier-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 6px;
-    }
-
-    .carrier-title {
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: #6B5028;
-    }
-
-    .carrier-ratio-tag {
-      background: #EFE4D2;
-      color: #6B5028;
-      font-size: 0.74rem;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 12px;
-    }
-
-    .carrier-desc {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* 現場試聞氣味微調手風琴 */
-    .swap-accordion {
-      border: 1px solid var(--sage-border);
-      background: #F6F4EE;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
-
-    .swap-accordion-btn {
-      width: 100%;
-      background: none;
-      border: none;
-      padding: 12px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: var(--sage-deep);
-      cursor: pointer;
-      text-align: left;
-    }
-
-    .swap-accordion-panel {
-      display: none;
-      padding: 12px 14px 14px;
-      background: #fff;
-      border-top: 1px solid var(--sage-border);
-    }
-
-    .swap-accordion-panel.open {
-      display: block;
-    }
-
-    .swap-intro {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 10px;
-    }
-
-    .swap-chip-list {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-
-    .swap-oil-chip {
-      background: #F4F6F4;
-      border: 1px solid var(--sage-border);
-      border-radius: 9px;
-      padding: 8px 12px;
-      font-size: 0.83rem;
-      color: var(--text-primary);
-      font-weight: 500;
-    }
-
-    .rx-footer-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .btn-outline-sage {
-      background: #fff;
-      border: 1px solid var(--sage-border);
-      color: var(--sage-deep);
-      padding: 12px 22px;
-      border-radius: 28px;
-      font-size: 0.92rem;
-      font-weight: 500;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    footer {
-      width: 100%;
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 12px 16px 22px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 6px 16px;
-      font-size: 0.74rem;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    /* 芳療師速查彈窗 */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(26, 36, 31, 0.55);
-      backdrop-filter: blur(4px);
-      z-index: 100;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-    }
-
-    .modal-overlay.open {
-      display: flex;
-    }
-
-    .modal-card {
-      background: #fff;
-      width: min(100%, 880px);
-      max-height: 88vh;
-      border-radius: 18px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.25);
-    }
-
-    .modal-top {
-      background: var(--sage-deep);
-      color: #fff;
-      padding: 14px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .modal-top h3 {
-      font-size: 0.95rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-    }
-
-    .modal-x {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 0 6px;
-    }
-
-    .modal-nav-tabs {
-      display: flex;
-      background: var(--bg-cream);
-      border-bottom: 1px solid var(--sage-border);
-    }
-
-    .m-tab {
-      flex: 1;
-      padding: 11px 6px;
-      background: none;
-      border: none;
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      cursor: pointer;
-    }
-
-    .m-tab.active {
-      background: #fff;
-      color: var(--sage-deep);
-      border-bottom: 2px solid var(--sage-deep);
-    }
-
-    .modal-scroll-area {
-      padding: 16px;
-      overflow-y: auto;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      flex: 1;
-    }
-
-    .quad-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .quad-item {
-      background: #FAF9F6;
-      border: 1px solid var(--sage-border);
-      border-radius: 12px;
-      padding: 14px;
-    }
-
-    .quad-item h4 {
-      color: var(--sage-deep);
-      font-size: 0.94rem;
-      margin-bottom: 5px;
-    }
-
-    .quad-item .chem-tag {
-      font-size: 0.76rem;
-      color: var(--gold-warm);
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .quad-item p {
-      font-size: 0.83rem;
-      color: var(--text-secondary);
-      line-height: 1.55;
-    }
-
-    .filter-input {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid var(--sage-border);
-      border-radius: 10px;
-      margin-bottom: 12px;
-      font-size: 16px;
-    }
-
-    .ref-table {
-      width: 100%;
-      min-width: 520px;
-      border-collapse: collapse;
-      font-size: 0.83rem;
-    }
-
-    .ref-table th, .ref-table td {
-      padding: 9px 7px;
-      text-align: left;
-      border-bottom: 1px solid var(--sage-border);
-    }
-
-    .ref-table th {
-      background: var(--bg-cream);
-      color: var(--sage-deep);
-      position: sticky;
-      top: 0;
-    }
-
-    .btn-preview-sm {
-      background: var(--sage-soft);
-      color: var(--sage-deep);
-      border: none;
-      padding: 6px 11px;
-      border-radius: 12px;
-      font-size: 0.76rem;
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    @media screen and (min-width: 768px) {
-      .tarot-card-back {
-        width: 132px;
-        height: 214px;
-      }
-    }
-
-    @media screen and (max-width: 767px) {
-      .rx-grid {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        padding: 18px 14px;
-      }
-      .tarot-face-card {
-        width: 208px;
-        height: 320px;
-      }
-      .rx-footer-actions {
-        flex-direction: column;
-      }
-      .rx-footer-actions button {
-        width: 100%;
-      }
-      .quad-cards-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media screen and (max-width: 420px) {
-      .brand-titles .en-subtitle {
-        display: none;
-      }
-      .btn-sage-solid {
-        width: 100%;
-      }
-      .deck-toolbar {
-        flex-direction: column;
-      }
-      .deck-toolbar button, .pill-hint {
-        width: 100%;
-      }
-    }
-
+    /* 僅在支援滑鼠懸停的裝置啟用卡片微浮起，避免觸控點擊後卡住 */
     @media (hover: hover) and (pointer: fine) {
-      .btn-ref:hover {
-        background: #fff;
-        border-color: var(--sage-mid);
-      }
-      .btn-sage-solid:hover {
-        background: var(--sage-mid);
-        transform: translateY(-2px);
-      }
-      .tarot-card-back:hover {
+      .tarot-back-card:hover {
         transform: translateY(-12px) scale(1.03);
-        box-shadow: 0 14px 28px rgba(36, 55, 45, 0.26);
-      }
-      .btn-outline-sage:hover {
-        background: var(--sage-soft);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
+        box-shadow: 0 14px 28px rgba(34, 76, 44, 0.28);
       }
     }
   </style>
 </head>
-<body>
-  <div class="app-shell">
-    <!-- 頂部品牌導覽（點擊品牌標誌亦可回到迎賓首頁） -->
-    <header>
-      <div class="brand-group" onclick="resetForNextGuest()" title="回到迎賓首頁">
-        <div class="brand-emblem" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+<body class="font-sans antialiased selection:bg-sage-deep/20">
+
+  <!-- 外層保護殼 -->
+  <div class="app-shell flex flex-col justify-between">
+
+    <!-- 頂部導覽列 -->
+    <header class="w-full max-w-6xl mx-auto px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between gap-2.5 z-20">
+      <!-- 點擊品牌 LOGO 區塊可隨時回到迎賓首頁 -->
+      <div class="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1 cursor-pointer" onclick="resetForNextGuest()" title="回到靜心迎賓首頁">
+        <!-- 品牌 LOGO SVG（小尺寸徽章） -->
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-cream-base border border-sage-border flex items-center justify-center shrink-0 shadow-xs p-0.5">
+          <svg class="w-full h-full" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="森心養生品牌標誌">
+            <circle cx="60" cy="60" r="54" stroke="#2F663C" stroke-width="3.2"/>
+            <!-- 六道暖金放射光芒 -->
+            <line x1="46" y1="22" x2="50" y2="30" stroke="#E5B24C" stroke-width="2.8" stroke-linecap="round"/>
+            <line x1="74" y1="22" x2="70" y2="30" stroke="#E5B24C" stroke-width="2.8" stroke-linecap="round"/>
+            <line x1="25" y1="38" x2="33" y2="43" stroke="#E5B24C" stroke-width="2.8" stroke-linecap="round"/>
+            <line x1="95" y1="38" x2="87" y2="43" stroke="#E5B24C" stroke-width="2.8" stroke-linecap="round"/>
+            <line x1="18" y1="62" x2="27" y2="62" stroke="#E5B24C" stroke-width="2.8" stroke-linecap="round"/>
+            <line x1="102" y1="62" x2="93" y2="62" stroke="#E5B24C" stroke-width="2.8" stroke-linecap="round"/>
+            <!-- 主幹 -->
+            <path d="M60 113V45" stroke="#2F663C" stroke-width="3.6" stroke-linecap="round"/>
+            <!-- 中央大葉片 -->
+            <path d="M60 14C46 27 45 45 60 56C75 45 74 27 60 14Z" fill="#2F663C"/>
+            <path d="M60 22V52M60 32L53 27M60 39L67 34M60 45L53 40" stroke="#F7F4ED" stroke-width="1.6" stroke-linecap="round"/>
+            <!-- 左上對稱側葉 -->
+            <path d="M60 66C48 56 36 53 23 55C29 66 43 70 60 66Z" fill="#2F663C"/>
+            <path d="M58 65C47 61 38 58 28 57" stroke="#F7F4ED" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M52 57C46 47 40 40 31 36C31 46 39 54 52 57Z" fill="#2F663C"/>
+            <!-- 右上對稱側葉 -->
+            <path d="M60 66C72 56 84 53 97 55C91 66 77 70 60 66Z" fill="#2F663C"/>
+            <path d="M62 65C73 61 82 58 92 57" stroke="#F7F4ED" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M68 57C74 47 80 40 89 36C89 46 81 54 68 57Z" fill="#2F663C"/>
+            <!-- 左下圓果枝條 -->
+            <path d="M60 94C48 88 39 81 31 73" stroke="#2F663C" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="30" cy="72" r="3.4" fill="#2F663C"/>
+            <path d="M46 86L39 73" stroke="#2F663C" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="38" cy="71" r="3" fill="#2F663C"/>
+            <path d="M52 90L36 90" stroke="#2F663C" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="34" cy="90" r="3" fill="#2F663C"/>
+            <!-- 右下圓果枝條與小葉 -->
+            <path d="M60 96C72 90 81 82 89 73" stroke="#2F663C" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="90" cy="72" r="3.4" fill="#2F663C"/>
+            <path d="M71 89C74 81 78 76 83 73C83 79 79 86 71 89Z" fill="#2F663C"/>
+            <path d="M77 85L88 86" stroke="#2F663C" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="90" cy="86" r="3" fill="#2F663C"/>
           </svg>
         </div>
-        <div class="brand-titles">
-          <span class="zh-title">森呼吸芳療塔羅</span>
-          <span class="en-subtitle">BOTANICAL TAROT &amp; AROMATHERAPY</span>
+        <div class="flex flex-col min-w-0">
+          <span class="font-serif text-base sm:text-lg font-bold text-sage-deep tracking-wider truncate">森心養生</span>
+          <span class="text-[10px] sm:text-[11px] font-medium text-sage-mid tracking-[0.16em] uppercase truncate">SENXIN YANGSHENG</span>
         </div>
       </div>
-      <button class="btn-ref" onclick="openRefModal()">
+
+      <!-- 右上角芳療師速查表按鈕 -->
+      <button type="button" onclick="openRefModal()" class="shrink-0 px-3.5 sm:px-4 py-2.5 min-h-[42px] rounded-full bg-white/90 hover:bg-white border border-sage-border hover:border-sage-deep text-sage-deep text-xs sm:text-sm font-medium shadow-xs transition flex items-center gap-1.5 cursor-pointer">
         <span>📋 芳療師速查表</span>
       </button>
     </header>
 
-    <main>
-      <!-- 畫面 1：靜心迎賓 -->
-      <section id="view-welcome" class="view-section active">
-        <div class="welcome-card">
-          <div class="breath-orb-container">
-            <div class="breath-aura"></div>
-            <div class="breath-aura-inner"></div>
-            <div class="breath-center">深呼吸</div>
+    <!-- 主內容區 -->
+    <main class="flex-1 w-full max-w-6xl min-w-0 mx-auto px-3.5 sm:px-6 pt-2 pb-8 flex flex-col items-center justify-center">
+
+      <!-- ==================== 1. 靜心迎賓首頁 ==================== -->
+      <section id="view-welcome" class="w-full max-w-xl mx-auto text-center py-4 sm:py-6 px-2 flex flex-col items-center">
+        <!-- 品牌 LOGO 呼吸光環視覺 -->
+        <div class="relative w-40 h-40 sm:w-44 sm:h-44 mb-5 flex items-center justify-center">
+          <div class="absolute inset-0 rounded-full bg-sage-deep/10 animate-breath"></div>
+          <div class="absolute inset-3 rounded-full border border-gold-warm/45 animate-breath-delay"></div>
+          <div class="relative z-10 w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-cream-base shadow-md flex items-center justify-center p-1">
+            <!-- 完整復刻「森心養生」品牌植物圓徽 SVG -->
+            <svg class="w-full h-full" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="森心養生 LOGO">
+              <circle cx="60" cy="60" r="55" stroke="#2F663C" stroke-width="2.8"/>
+              <!-- 六道暖金放射光芒 -->
+              <line x1="46" y1="21" x2="50" y2="29" stroke="#E5B24C" stroke-width="2.6" stroke-linecap="round"/>
+              <line x1="74" y1="21" x2="70" y2="29" stroke="#E5B24C" stroke-width="2.6" stroke-linecap="round"/>
+              <line x1="24" y1="37" x2="32" y2="42" stroke="#E5B24C" stroke-width="2.6" stroke-linecap="round"/>
+              <line x1="96" y1="37" x2="88" y2="42" stroke="#E5B24C" stroke-width="2.6" stroke-linecap="round"/>
+              <line x1="17" y1="62" x2="26" y2="62" stroke="#E5B24C" stroke-width="2.6" stroke-linecap="round"/>
+              <line x1="103" y1="62" x2="94" y2="62" stroke="#E5B24C" stroke-width="2.6" stroke-linecap="round"/>
+              <!-- 主幹 -->
+              <path d="M60 114V45" stroke="#2F663C" stroke-width="3.4" stroke-linecap="round"/>
+              <!-- 中央大葉片 -->
+              <path d="M60 13C46 26 45 45 60 56C75 45 74 26 60 13Z" fill="#2F663C"/>
+              <path d="M60 21V52M60 31L53 26M60 38L67 33M60 45L53 40" stroke="#F7F4ED" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- 左側對稱雙葉 -->
+              <path d="M60 66C48 56 36 53 23 55C29 66 43 70 60 66Z" fill="#2F663C"/>
+              <path d="M58 65C47 61 38 58 28 57" stroke="#F7F4ED" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M52 57C46 47 40 40 31 36C31 46 39 54 52 57Z" fill="#2F663C"/>
+              <path d="M50 55C44 48 39 43 34 39" stroke="#F7F4ED" stroke-width="1.1" stroke-linecap="round"/>
+              <!-- 右側對稱雙葉 -->
+              <path d="M60 66C72 56 84 53 97 55C91 66 77 70 60 66Z" fill="#2F663C"/>
+              <path d="M62 65C73 61 82 58 92 57" stroke="#F7F4ED" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M68 57C74 47 80 40 89 36C89 46 81 54 68 57Z" fill="#2F663C"/>
+              <path d="M70 55C76 48 81 43 86 39" stroke="#F7F4ED" stroke-width="1.1" stroke-linecap="round"/>
+              <!-- 左下圓果枝條 -->
+              <path d="M60 94C48 88 39 81 31 73" stroke="#2F663C" stroke-width="2.6" stroke-linecap="round"/>
+              <circle cx="30" cy="72" r="3.2" fill="#2F663C"/>
+              <path d="M46 86L39 73" stroke="#2F663C" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="38" cy="71" r="2.8" fill="#2F663C"/>
+              <path d="M52 90L36 90" stroke="#2F663C" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="34" cy="90" r="2.8" fill="#2F663C"/>
+              <circle cx="48" cy="77" r="2.5" fill="#2F663C"/>
+              <!-- 右下圓果枝條與小葉 -->
+              <path d="M60 96C72 90 81 82 89 73" stroke="#2F663C" stroke-width="2.6" stroke-linecap="round"/>
+              <circle cx="90" cy="72" r="3.2" fill="#2F663C"/>
+              <path d="M71 89C74 81 78 76 83 73C83 79 79 86 71 89Z" fill="#2F663C"/>
+              <path d="M65 92C66 84 68 78 72 74C73 80 71 87 65 92Z" fill="#2F663C"/>
+              <path d="M77 85L88 86" stroke="#2F663C" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="90" cy="86" r="2.8" fill="#2F663C"/>
+            </svg>
           </div>
-          <div class="eyebrow-tag">Aromatherapy × Tarot Ritual</div>
-          <h1 class="welcome-heading">傾聽身體的聲音<br>尋找今日的命定香氣</h1>
-          <p class="welcome-copy">
-            請先喝一口溫熱的迎賓茶，輕輕閉上眼睛深呼吸三次。<br>
-            在心中默想：<strong>「我現在的身心，最需要什麼樣的照顧？」</strong><br>
-            準備好後，憑直覺為自己抽取一張專屬處方牌。
+        </div>
+
+        <!-- 品牌標準字標題 -->
+        <div class="mb-4">
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-sage-deep tracking-[0.18em]">森心養生</div>
+          <div class="text-xs sm:text-sm font-semibold text-sage-deep/85 tracking-[0.22em] uppercase mt-0.5">SENXIN YANGSHENG</div>
+        </div>
+
+        <h1 class="font-serif text-xl sm:text-3xl font-semibold text-ink-main leading-snug tracking-wide mb-3.5">
+          傾聽身體的聲音，尋找今日的命定香氣
+        </h1>
+
+        <p class="text-sm sm:text-base text-ink-sub leading-relaxed max-w-md mx-auto mb-7">
+          請先喝一口溫熱的迎賓茶，輕輕閉上眼睛深呼吸三次。<br />
+          在心中默想：<strong class="text-sage-deep font-semibold">「我現在的身心，最需要什麼樣的照顧？」</strong><br />
+          準備好後，憑直覺為自己抽取一張專屬處方牌。
+        </p>
+
+        <button type="button" onclick="showDrawView()" class="w-full sm:w-auto px-9 py-4 min-h-[48px] rounded-full bg-sage-deep hover:bg-sage-dark text-white text-base font-medium tracking-widest shadow-lg shadow-sage-deep/25 transition transform active:scale-98 cursor-pointer">
+          開始直覺選牌
+        </button>
+      </section>
+
+      <!-- ==================== 2. 78 張橫向滑動抽牌區 ==================== -->
+      <section id="view-draw" class="hidden w-full max-w-full min-w-0 flex-col items-center">
+        <div class="text-center max-w-xl px-2 mb-4">
+          <div class="text-xs font-semibold tracking-[0.18em] text-gold-dark uppercase mb-1.5">SENXIN 78 TAROT CARDS</div>
+          <h2 class="font-serif text-xl sm:text-2xl font-semibold text-sage-deep leading-snug mb-1.5">
+            左右滑動牌陣，憑直覺點選一張吸引你的牌
+          </h2>
+          <p class="text-xs sm:text-sm text-ink-sub leading-relaxed">
+            共 78 張完整牌庫已為您展開，點擊任一張牌背即可翻開今日處方
           </p>
-          <button class="btn-sage-solid" onclick="showDrawView()">開始直覺選牌</button>
+        </div>
+
+        <!-- 洗牌與滑動提示工具列 -->
+        <div class="w-full max-w-lg flex flex-wrap items-center justify-center gap-2.5 mb-3 px-1">
+          <button type="button" onclick="triggerShuffle()" class="flex-1 sm:flex-initial min-w-[140px] px-4 py-2.5 min-h-[42px] rounded-full bg-white hover:bg-sage-soft/50 border border-sage-border text-sage-deep text-xs sm:text-sm font-medium shadow-xs transition flex items-center justify-center gap-1.5 cursor-pointer">
+            <span>🔀 重新洗牌</span>
+          </button>
+          <div class="flex-1 sm:flex-initial min-w-[180px] px-4 py-2.5 min-h-[42px] rounded-full bg-gold-pale text-gold-dark text-xs sm:text-sm flex items-center justify-center text-center">
+            提示：可左右滑動瀏覽整副牌
+          </div>
+        </div>
+
+        <!-- 橫向滑動牌陣容器 -->
+        <div class="w-full max-w-full min-w-0 overflow-hidden my-1">
+          <div id="deck-scroller" class="w-full max-w-full overflow-x-auto overflow-y-hidden no-scrollbar py-5 px-4 sm:px-6 flex flex-nowrap gap-3 sm:gap-4 snap-x snap-proximity">
+            <!-- 78 張牌背由 JS 動態渲染 -->
+          </div>
+        </div>
+
+        <!-- 左右導覽按鈕 -->
+        <div class="w-full flex items-center justify-center gap-4 mt-2">
+          <button type="button" onclick="scrollDeckBy(-260)" aria-label="向左滑動" class="w-10 h-10 min-h-[40px] rounded-full bg-white hover:bg-sage-soft border border-sage-border text-sage-deep flex items-center justify-center text-lg shadow-xs transition cursor-pointer">
+            ‹
+          </button>
+          <span class="text-xs sm:text-sm text-ink-sub tracking-wider">滑動挑選您的命定牌卡</span>
+          <button type="button" onclick="scrollDeckBy(260)" aria-label="向右滑動" class="w-10 h-10 min-h-[40px] rounded-full bg-white hover:bg-sage-soft border border-sage-border text-sage-deep flex items-center justify-center text-lg shadow-xs transition cursor-pointer">
+            ›
+          </button>
         </div>
       </section>
 
-      <!-- 畫面 2：78 張橫向滑動牌陣 -->
-      <section id="view-draw" class="view-section">
-        <div class="deck-header">
-          <div class="eyebrow-tag">78 TAROT CARDS</div>
-          <h2>左右滑動牌陣，憑直覺點選一張吸引你的牌</h2>
-          <p>共 78 張完整牌庫已為您展開，點擊任一張牌背即可翻開今日處方</p>
-        </div>
+      <!-- ==================== 3. 今日身心療癒與芳療處方籤結果頁 ==================== -->
+      <section id="view-result" class="hidden w-full max-w-4xl min-w-0 flex-col items-center">
+        <div class="w-full bg-white rounded-3xl overflow-hidden shadow-xl shadow-sage-deep/10 border border-sage-border">
 
-        <div class="deck-toolbar">
-          <button class="btn-ref" onclick="triggerShuffle()">🔀 重新洗牌</button>
-          <div class="pill-hint">提示：可左右滑動瀏覽整副牌</div>
-        </div>
-
-        <div class="deck-carousel-wrap">
-          <div class="deck-scroller" id="deck-scroller"></div>
-        </div>
-
-        <div class="deck-nav-controls">
-          <button class="nav-circle-btn" onclick="scrollDeckBy(-250)" aria-label="向左滑動">‹</button>
-          <span class="nav-label">滑動挑選您的命定牌卡</span>
-          <button class="nav-circle-btn" onclick="scrollDeckBy(250)" aria-label="向右滑動">›</button>
-        </div>
-      </section>
-
-      <!-- 畫面 3：今日身心療癒與芳療處方籤 -->
-      <section id="view-result" class="view-section">
-        <div class="rx-sheet">
-          <div class="rx-banner">
-            <div class="rx-banner-title">
-              <span class="rx-banner-dot"></span>
-              <span>今日身心療癒與芳療處方籤</span>
+          <!-- 頂部處方籤橫幅 -->
+          <div class="bg-gradient-to-r from-[#224C2C] to-[#2F663C] text-white px-5 sm:px-7 py-4 flex flex-wrap items-center justify-between gap-2.5">
+            <div class="flex items-center gap-2.5 text-sm sm:text-base font-medium tracking-wider">
+              <span class="w-2 h-2 rounded-full bg-[#E5B24C] shrink-0"></span>
+              <span>森心養生｜今日身心療癒與芳療處方籤</span>
             </div>
-            <div class="rx-banner-pill" id="rx-header-pill">小阿爾克那｜精準調理單方</div>
+            <div id="rx-header-pill" class="px-3.5 py-1 rounded-full bg-white/15 border border-white/25 text-xs text-gold-pale tracking-wider">
+              小阿爾克那｜精準調理單方
+            </div>
           </div>
 
-          <div class="rx-grid">
-            <!-- 左側抽出的塔羅牌視覺 -->
-            <div class="card-stage">
-              <div class="tarot-face-card" id="tarot-face-card">
-                <div class="face-top-meta">
-                  <div class="face-en" id="face-en">ACE OF CUPS</div>
-                  <div class="face-zh" id="face-zh">聖杯 Ace</div>
+          <!-- 雙欄響應式主體 -->
+          <div class="grid grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)] gap-6 sm:gap-8 p-5 sm:p-7">
+
+            <!-- 左側：抽出的塔羅牌視覺卡片 -->
+            <div class="flex flex-col items-center">
+              <div id="tarot-face-card" class="w-52 sm:w-56 h-80 sm:h-[344px] rounded-2xl bg-gradient-to-b from-[#FCFBF8] to-[#F3EFE5] border-[1.5px] border-[#D6C299] shadow-lg shadow-sage-deep/15 p-5 flex flex-col justify-between items-center text-center relative animate-reveal">
+                <div class="absolute inset-2 border border-gold-warm/45 rounded-xl pointer-events-none"></div>
+
+                <div class="mt-1 z-10">
+                  <div id="face-en" class="text-[11px] tracking-[0.16em] text-gold-dark uppercase font-semibold mb-1">ACE OF CUPS</div>
+                  <div id="face-zh" class="font-serif text-2xl font-semibold text-sage-deep tracking-wider">聖杯 Ace</div>
                 </div>
-                <div class="face-symbol-ring" id="face-symbol"></div>
-                <div class="face-bottom-tag" id="face-element-tag">水元素・心輪溫柔敞開</div>
+
+                <!-- 極簡植物線條 SVG 圖示 -->
+                <div id="face-symbol" class="w-24 h-24 rounded-full bg-sage-soft/75 border border-gold-warm/55 flex items-center justify-center text-sage-deep z-10"></div>
+
+                <div id="face-element-tag" class="text-xs text-sage-mid tracking-wider mb-1 z-10">
+                  水元素・心輪溫柔敞開
+                </div>
               </div>
-              <div class="model-footnote">
+
+              <p class="text-[11px] text-ink-muted text-center leading-relaxed mt-3 max-w-[230px]">
                 此處方依據法系芳療《L'Aromathérapie Exactement》四象限與 Florihana 植物油模型匹配
-              </div>
+              </p>
             </div>
 
-            <!-- 右側芳療解讀與配方 -->
-            <div class="rx-details-col">
+            <!-- 右側：溫柔療癒解讀 ＋ 精油配方 ＋ 基底油 ＋ 微調手風琴 -->
+            <div class="min-w-0 w-full flex flex-col justify-between">
               <div>
-                <div class="rx-block-label">✦ 當下身心狀態解讀</div>
-                <div class="rx-state-box" id="rx-reading-text"></div>
+                <!-- 當下身心狀態解讀 -->
+                <div class="text-sm font-semibold text-sage-deep tracking-wider mb-2 flex items-center gap-1.5">
+                  <span>✦ 當下身心狀態解讀</span>
+                </div>
+                <div id="rx-reading-text" class="bg-[#F9F8F3] border-l-[3px] border-sage-deep rounded-xl p-4 text-sm sm:text-base text-ink-main leading-relaxed mb-5 break-words"></div>
 
-                <div class="rx-block-label">💧 今日命定精油與基底油配方</div>
-                <div class="quadrant-pill" id="rx-quadrant-pill">淋巴型・水象限</div>
-
-                <div class="oil-prescription-box">
-                  <div class="oil-title-row">
-                    <h4 id="rx-oil-name">無光敏佛手柑</h4>
-                    <span class="formula-chip" id="rx-formula-chip">單方精油調理</span>
-                  </div>
-                  <div class="oil-chem-desc" id="rx-chem-desc"></div>
+                <!-- 今日命定精油與基底油配方 -->
+                <div class="text-sm font-semibold text-sage-deep tracking-wider mb-2 flex items-center gap-1.5">
+                  <span>💧 今日命定精油與基底油配方</span>
+                </div>
+                <div id="rx-quadrant-pill" class="inline-block bg-sage-deep text-white text-xs px-3.5 py-1.5 rounded-full tracking-wider mb-2.5">
+                  淋巴型・水象限
                 </div>
 
-                <!-- 基底油與滴數調配卡片 -->
-                <div class="carrier-oil-box">
-                  <div class="carrier-header">
-                    <span class="carrier-title" id="rx-carrier-name">🧴 建議基底油：甜杏仁油 20ml（或荷荷芭油 1:1）</span>
-                    <span class="carrier-ratio-tag" id="rx-carrier-drops">全身 2%｜共 8 滴</span>
+                <!-- 單方/複方精油卡 -->
+                <div class="border border-sage-border bg-cream-card rounded-2xl p-4 sm:p-5 mb-3 break-words">
+                  <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                    <h4 id="rx-oil-name" class="font-serif text-xl font-semibold text-sage-deep">無光敏佛手柑 (FCF)</h4>
+                    <span id="rx-formula-chip" class="bg-gold-pale text-gold-dark text-xs font-semibold px-3 py-1 rounded-full">單方精油調理</span>
                   </div>
-                  <div class="carrier-desc" id="rx-carrier-guide"></div>
+                  <p id="rx-chem-desc" class="text-xs sm:text-sm text-ink-sub leading-relaxed"></p>
+                </div>
+
+                <!-- 建議基底油與調配滴數卡片 -->
+                <div class="border border-[#DFD2B8] bg-cream-warm rounded-2xl p-4 mb-3.5 break-words">
+                  <div class="flex flex-wrap items-center justify-between gap-1.5 mb-1.5">
+                    <span id="rx-carrier-name" class="text-xs sm:text-sm font-semibold text-[#6E5120]">🧴 建議基底油：甜杏仁油 20ml</span>
+                    <span id="rx-carrier-drops" class="bg-[#EFE3C8] text-[#6E5120] text-xs font-semibold px-2.5 py-1 rounded-full">全身 2%｜共 8 滴</span>
+                  </div>
+                  <p id="rx-carrier-guide" class="text-xs sm:text-sm text-ink-sub leading-relaxed"></p>
                 </div>
 
                 <!-- 現場試聞氣味微調手風琴 -->
-                <div class="swap-accordion">
-                  <button class="swap-accordion-btn" onclick="toggleSwapPanel()">
+                <div class="border border-sage-border bg-cream-base rounded-xl mb-5 overflow-hidden">
+                  <button type="button" onclick="toggleSwapPanel()" class="w-full px-4 py-3 min-h-[44px] flex items-center justify-between gap-2 text-xs sm:text-sm font-semibold text-sage-deep text-left cursor-pointer">
                     <span>＋ 現場試聞氣味微調（同象限替換建議）</span>
-                    <span id="swap-chevron">⌄</span>
+                    <span id="swap-chevron" class="text-base leading-none">⌄</span>
                   </button>
-                  <div class="swap-accordion-panel" id="swap-panel">
-                    <p class="swap-intro">
-                      若現場試聞後想微調香氣，可隨時請芳療師為您更換以下<strong>同象限・同等療癒頻率</strong>的 Florihana 單方精油：
+                  <div id="swap-panel" class="hidden px-4 pt-3 pb-4 bg-white border-t border-sage-border">
+                    <p class="text-xs text-ink-sub leading-relaxed mb-2.5">
+                      若現場試聞後想微調香氣，可隨時請芳療師為您更換以下<strong class="text-ink-main">同象限・同等療癒頻率</strong>的 Florihana 單方精油：
                     </p>
-                    <div class="swap-chip-list" id="swap-chip-list"></div>
+                    <div id="swap-chip-list" class="flex flex-col gap-2"></div>
                   </div>
                 </div>
               </div>
 
-              <!-- 修正：下一位客人直接跳轉回靜心迎賓首頁 -->
-              <div class="rx-footer-actions">
-                <button class="btn-sage-solid" onclick="resetForNextGuest()">↻ 下一位客人（回到靜心迎賓）</button>
-                <button class="btn-outline-sage" onclick="showDrawView()">返回牌陣重選</button>
+              <!-- 底部操作按鈕：下一位客人（回到靜心迎賓）＆ 返回牌陣重選 -->
+              <div class="flex flex-col sm:flex-row gap-2.5">
+                <button type="button" onclick="resetForNextGuest()" class="w-full sm:w-auto px-6 py-3.5 min-h-[46px] rounded-full bg-sage-deep hover:bg-sage-dark text-white text-sm font-medium tracking-wider shadow-md shadow-sage-deep/15 transition flex items-center justify-center gap-1.5 cursor-pointer">
+                  <span>↻ 下一位客人（回到靜心迎賓）</span>
+                </button>
+                <button type="button" onclick="showDrawView()" class="w-full sm:w-auto px-6 py-3.5 min-h-[46px] rounded-full bg-white hover:bg-sage-soft border border-sage-border text-sage-deep text-sm font-medium transition flex items-center justify-center cursor-pointer">
+                  返回牌陣重選
+                </button>
               </div>
             </div>
+
           </div>
         </div>
       </section>
+
     </main>
 
-    <footer>
-      <span>森呼吸芳療按摩工作室專屬系統</span>
+    <!-- 頁尾 -->
+    <footer class="w-full max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-ink-muted text-center">
+      <span>森心養生 SENXIN YANGSHENG 專屬芳療系統</span>
+      <span>•</span>
       <span>78 張完整塔羅 × 芳療家 Florihana 植物油與精油對照</span>
     </footer>
   </div>
 
-  <!-- 芳療師速查表彈窗 -->
-  <div class="modal-overlay" id="ref-modal" onclick="handleModalBackdrop(event)">
-    <div class="modal-card">
-      <div class="modal-top">
-        <h3>🌿 芳療師速查表（Florihana 四象限精油 × 基底油調配）</h3>
-        <button class="modal-x" onclick="closeRefModal()">&times;</button>
+  <!-- ==================== 4. 芳療師速查表彈窗 (Modal) ==================== -->
+  <div id="ref-modal" onclick="handleModalBackdrop(event)" class="hidden fixed inset-0 bg-[#1A241F]/60 backdrop-blur-xs z-50 items-center justify-center p-3 sm:p-5">
+    <div class="bg-white w-full max-w-4xl max-h-[88vh] rounded-2xl flex flex-col overflow-hidden shadow-2xl">
+      <div class="bg-sage-deep text-white px-5 py-4 flex items-center justify-between gap-3">
+        <h3 class="font-serif text-sm sm:text-base font-medium tracking-wider">🌿 森心養生｜芳療師速查表（Florihana 四象限 × 基底油調配）</h3>
+        <button type="button" onclick="closeRefModal()" aria-label="關閉視窗" class="text-white/80 hover:text-white text-2xl leading-none px-1.5 cursor-pointer">&times;</button>
       </div>
-      <div class="modal-nav-tabs">
-        <button class="m-tab active" id="m-tab-quad" onclick="switchModalView('quad')">四象限精油與基底油指南</button>
-        <button class="m-tab" id="m-tab-db" onclick="switchModalView('db')">78 張完整牌庫一覽</button>
+
+      <!-- Modal 分頁切換 -->
+      <div class="flex bg-cream-base border-b border-sage-border">
+        <button type="button" id="m-tab-quad" onclick="switchModalView('quad')" class="flex-1 py-3 px-2 text-xs sm:text-sm font-semibold bg-white text-sage-deep border-b-2 border-sage-deep cursor-pointer">
+          四象限精油與基底油指南
+        </button>
+        <button type="button" id="m-tab-db" onclick="switchModalView('db')" class="flex-1 py-3 px-2 text-xs sm:text-sm font-semibold text-ink-sub hover:text-sage-deep cursor-pointer">
+          78 張完整牌庫一覽
+        </button>
       </div>
-      <div class="modal-scroll-area" id="m-view-quad">
-        <div class="quad-cards-grid">
-          <div class="quad-item">
-            <h4>1. 神經型・土象限（陰／涼／負電｜親油性）</h4>
-            <div class="chem-tag">官能基：酯類、倍半萜烯｜對應：錢幣牌組</div>
-            <p><strong>Florihana 單方：</strong>高地真正薰衣草、快樂鼠尾草、羅馬洋甘菊、大西洋雪松、岩蘭草。<br>
-               <strong>基底油搭檔：</strong>甜杏仁油 20ml（深層鬆肌推拿）；肩頸僵硬可加入 20% 聖約翰草浸泡油。</p>
+
+      <!-- 分頁 1：法系四象限與 14 支核心油指南 -->
+      <div id="m-view-quad" class="p-4 sm:p-6 overflow-y-auto flex-1 space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          <div class="bg-cream-card border border-sage-border rounded-xl p-4">
+            <h4 class="font-serif text-sage-deep font-semibold text-base mb-1">1. 神經型・土象限（陰／涼／負電｜親油性）</h4>
+            <div class="text-xs text-gold-dark font-semibold mb-2">官能基：酯類、倍半萜烯｜對應：錢幣牌組</div>
+            <p class="text-xs sm:text-sm text-ink-sub leading-relaxed">
+              <strong class="text-ink-main">Florihana 14核心單方：</strong>高地真正薰衣草、快樂鼠尾草、羅馬洋甘菊、大西洋雪松、岩蘭草。<br />
+              <strong class="text-ink-main">基底油搭檔：</strong>甜杏仁油 20ml（深層鬆肌推拿）；肩頸僵硬可加入 20% 聖約翰草浸泡油。
+            </p>
           </div>
-          <div class="quad-item">
-            <h4>2. 淋巴型・水象限（陰／涼／負電｜親水性）</h4>
-            <div class="chem-tag">官能基：醛類、酮類、內酯/香豆素｜對應：聖杯牌組</div>
-            <p><strong>Florihana 單方：</strong>無光敏佛手柑 (FCF)、山雞椒、高地真正薰衣草、玫瑰天竺葵。<br>
-               <strong>基底油搭檔：</strong>荷荷芭油 20ml（或與甜杏仁油 1:1 混合），清爽好吸收不黏膩。</p>
+          <div class="bg-cream-card border border-sage-border rounded-xl p-4">
+            <h4 class="font-serif text-sage-deep font-semibold text-base mb-1">2. 淋巴型・水象限（陰／涼／負電｜親水性）</h4>
+            <div class="text-xs text-gold-dark font-semibold mb-2">官能基：醛類、酮類、內酯/香豆素｜對應：聖杯牌組</div>
+            <p class="text-xs sm:text-sm text-ink-sub leading-relaxed">
+              <strong class="text-ink-main">Florihana 14核心單方：</strong>無光敏佛手柑 (FCF)、山雞椒、高地真正薰衣草、玫瑰天竺葵。<br />
+              <strong class="text-ink-main">基底油搭檔：</strong>荷荷芭油 20ml（或與甜杏仁油 1:1 混合），清爽好吸收不黏膩。
+            </p>
           </div>
-          <div class="quad-item">
-            <h4>3. 多血型・風象限（陽／熱／正電｜親水性）</h4>
-            <div class="chem-tag">官能基：單萜醇、倍半萜醇｜對應：寶劍牌組</div>
-            <p><strong>Florihana 單方：</strong>芳樟、玫瑰天竺葵、甜馬鬱蘭、澳洲檀香。<br>
-               <strong>基底油搭檔：</strong>甜杏仁油 20ml（或搭配聖約翰草浸泡油安撫緊繃神經）。</p>
+          <div class="bg-cream-card border border-sage-border rounded-xl p-4">
+            <h4 class="font-serif text-sage-deep font-semibold text-base mb-1">3. 多血型・風象限（陽／熱／正電｜親水性）</h4>
+            <div class="text-xs text-gold-dark font-semibold mb-2">官能基：單萜醇、倍半萜醇｜對應：寶劍牌組</div>
+            <p class="text-xs sm:text-sm text-ink-sub leading-relaxed">
+              <strong class="text-ink-main">Florihana 14核心單方：</strong>芳樟、玫瑰天竺葵、甜馬鬱蘭、澳洲檀香。<br />
+              <strong class="text-ink-main">基底油搭檔：</strong>甜杏仁油 20ml（或搭配聖約翰草浸泡油安撫緊繃神經）。
+            </p>
           </div>
-          <div class="quad-item">
-            <h4>4. 膽汁型・乾火象限（陽／熱／正電｜親油性）</h4>
-            <div class="chem-tag">官能基：單萜烯、氧化物、醚類｜對應：權杖牌組</div>
-            <p><strong>Florihana 單方：</strong>甜橙、黑雲杉、澳洲尤加利（搭配甜馬鬱蘭疏通肌肉）。<br>
-               <strong>基底油搭檔：</strong>甜杏仁油 20ml（順滑推開氣血瘀滯，適合深層經絡油壓）。</p>
+          <div class="bg-cream-card border border-sage-border rounded-xl p-4">
+            <h4 class="font-serif text-sage-deep font-semibold text-base mb-1">4. 膽汁型・乾火象限（陽／熱／正電｜親油性）</h4>
+            <div class="text-xs text-gold-dark font-semibold mb-2">官能基：單萜烯、氧化物、醚類｜對應：權杖牌組</div>
+            <p class="text-xs sm:text-sm text-ink-sub leading-relaxed">
+              <strong class="text-ink-main">Florihana 14核心單方：</strong>甜橙、黑雲杉、澳洲尤加利（搭配甜馬鬱蘭疏通肌肉）。<br />
+              <strong class="text-ink-main">基底油搭檔：</strong>甜杏仁油 20ml（順滑推開氣血瘀滯，適合深層經絡油壓）。
+            </p>
           </div>
         </div>
+
+        <!-- 3 款核心基底油速查卡 -->
+        <div class="bg-cream-warm border border-[#DFD2B8] rounded-xl p-4">
+          <h4 class="font-serif text-[#6E5120] font-semibold text-sm sm:text-base mb-2">🧴 Florihana 3 款核心基底油現場調配標準（20ml 基準）</h4>
+          <ul class="text-xs sm:text-sm text-ink-sub space-y-1.5 leading-relaxed">
+            <li>• <strong class="text-ink-main">甜杏仁油 20ml：</strong>主力萬用滑順推拿油。全身 2% 共 <strong>8 滴</strong>（大牌複方建議主調 5 滴＋輔助 3 滴）；局部深層痠痛 3% 共 <strong>12 滴</strong>。</li>
+            <li>• <strong class="text-ink-main">荷荷芭油 20ml：</strong>分子近皮脂、清爽不致痘，適合情緒水腫、夏季或臉部/頭皮（臉部建議 1% 共 4 滴）。</li>
+            <li>• <strong class="text-ink-main">聖約翰草浸泡油 4ml ＋ 甜杏仁油 16ml：</strong>紅寶石肌肉與神經修復油，專攻肩頸僵硬與高壓緊繃（具光敏性，適合避光部位）。</li>
+          </ul>
+        </div>
       </div>
-      <div class="modal-scroll-area" id="m-view-db" style="display:none;">
-        <input type="text" class="filter-input" id="ref-search" placeholder="搜尋牌名、精油或基底油（例如：佛手柑、聖約翰草、高塔）..." oninput="renderRefTable()" />
-        <table class="ref-table">
+
+      <!-- 分頁 2：78 張完整牌庫與基底油對照一覽 -->
+      <div id="m-view-db" class="hidden p-4 sm:p-6 overflow-y-auto overflow-x-auto flex-1">
+        <input type="text" id="ref-search" oninput="renderRefTable()" placeholder="搜尋牌名、精油、基底油或狀態（例如：佛手柑、聖約翰草、高塔）..." class="w-full px-3.5 py-2.5 mb-3.5 rounded-xl border border-sage-border text-base sm:text-sm focus:outline-none focus:border-sage-deep" />
+        <table class="w-full min-w-[520px] border-collapse text-xs sm:text-sm">
           <thead>
-            <tr>
-              <th>牌名</th>
-              <th>處方類型</th>
-              <th>推薦精油</th>
-              <th>建議基底油</th>
-              <th>操作</th>
+            <tr class="bg-cream-base text-sage-deep border-b border-sage-border">
+              <th class="py-2.5 px-2 text-left font-semibold">牌名</th>
+              <th class="py-2.5 px-2 text-left font-semibold">處方類型</th>
+              <th class="py-2.5 px-2 text-left font-semibold">推薦精油</th>
+              <th class="py-2.5 px-2 text-left font-semibold">建議基底油</th>
+              <th class="py-2.5 px-2 text-left font-semibold">操作</th>
             </tr>
           </thead>
-          <tbody id="ref-table-body"></tbody>
+          <tbody id="ref-table-body" class="divide-y divide-sage-border/60"></tbody>
         </table>
       </div>
     </div>
   </div>
 
   <script>
+    // 極簡植物幾何線條 SVG 圖示集
     const SYMBOLS_SVG = {
-      major: `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`,
-      wands: `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c.5 3.5-2 5.5-2 8.5a4 4 0 0 0 8 0c0-2.5-1.5-4.5-3-6.5-.5 2-1.5 3-3 3Z"/><path d="M12 14v8M9 18h6"/></svg>`,
-      cups: `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-1.5 2-3 3.5-3 5a3 3 0 0 0 6 0c0-1.5-1.5-3-3-5Z" stroke="#B8986A"/><path d="M7 11h10l-1 4a4 4 0 0 1-8 0l-1-4Z"/><path d="M12 19v3M8 22h8"/></svg>`,
-      swords: `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>`,
-      pentacles: `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
+      major: `<svg class="w-11 h-11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`,
+      wands: `<svg class="w-11 h-11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c.5 3.5-2 5.5-2 8.5a4 4 0 0 0 8 0c0-2.5-1.5-4.5-3-6.5-.5 2-1.5 3-3 3Z"/><path d="M12 14v8M9 18h6"/></svg>`,
+      cups: `<svg class="w-11 h-11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-1.5 2-3 3.5-3 5a3 3 0 0 0 6 0c0-1.5-1.5-3-3-5Z" stroke="#E5B24C"/><path d="M7 11h10l-1 4a4 4 0 0 1-8 0l-1-4Z"/><path d="M12 19v3M8 22h8"/></svg>`,
+      swords: `<svg class="w-11 h-11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>`,
+      pentacles: `<svg class="w-11 h-11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
     };
 
+    // 芳療家（Florihana）3 款核心基底油設定
     const CARRIER_PRESETS = {
       almond: {
         name: "甜杏仁油 20ml（主力滑順推拿）",
@@ -1279,6 +546,7 @@
       }
     };
 
+    // 同象限 Florihana 14 核心單方替換建議
     const QUADRANT_SWAPS = {
       "神經型・土象限": [
         "大西洋雪松（倍半萜烯｜深層鬆肌與循環）",
@@ -1313,6 +581,7 @@
       ]
     };
 
+    // 完整 78 張塔羅牌資料庫（22 大牌深層複方 + 56 小牌精準單方）
     const TAROT_DECK = [
       // === 22 張大阿爾克那（複方） ===
       { id: 0, name: "0. 愚人", en: "THE FOOL", isMajor: true, symbol: "major", elementTag: "風元素・輕盈新生", quadrant: "膽汁型・乾火象限", carrier: "jojoba",
@@ -1583,20 +852,30 @@
 
     let activeDeck = [...TAROT_DECK];
 
+    // 切換主畫面
     function switchView(viewId) {
-      document.querySelectorAll(".view-section").forEach(v => v.classList.remove("active"));
-      document.getElementById(viewId).classList.add("active");
+      ["view-welcome", "view-draw", "view-result"].forEach(id => {
+        const el = document.getElementById(id);
+        if (id === viewId) {
+          el.classList.remove("hidden");
+          el.classList.add("flex");
+        } else {
+          el.classList.add("hidden");
+          el.classList.remove("flex");
+        }
+      });
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    // 下一位客人：重新洗牌並跳轉回最初始的「靜心迎賓首頁」
+    // 下一位客人：重新洗牌並重置狀態跳轉回最初始的「靜心迎賓首頁」
     function resetForNextGuest() {
       shuffleCards(activeDeck);
-      document.getElementById("swap-panel").classList.remove("open");
+      document.getElementById("swap-panel").classList.add("hidden");
       document.getElementById("swap-chevron").textContent = "⌄";
       switchView("view-welcome");
     }
 
+    // Fisher-Yates 洗牌演算法
     function shuffleCards(list) {
       for (let i = list.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -1604,6 +883,7 @@
       }
     }
 
+    // 進入選牌畫面
     function showDrawView() {
       shuffleCards(activeDeck);
       renderDeckCarousel();
@@ -1614,40 +894,62 @@
       }, 80);
     }
 
+    // 渲染 78 張牌背（中央融入「森心養生」品牌圓形植物徽章）
     function renderDeckCarousel() {
       const scroller = document.getElementById("deck-scroller");
       scroller.innerHTML = "";
       activeDeck.forEach((card, idx) => {
         const numStr = String(idx + 1).padStart(2, "0");
-        const el = document.createElement("div");
-        el.className = "tarot-card-back";
+        const el = document.createElement("button");
+        el.type = "button";
+        el.className = "tarot-back-card w-28 sm:w-32 h-44 sm:h-52 rounded-xl bg-gradient-to-b from-[#2F663C] to-[#1D4025] border-2 border-[#E5B24C]/85 shadow-md shrink-0 snap-center cursor-pointer relative flex flex-col items-center justify-between py-3 px-2 select-none transition-transform duration-200";
+        el.setAttribute("aria-label", `第 ${numStr} 張塔羅牌`);
         el.innerHTML = `
-          <div class="back-num">✦ ${numStr} ✦</div>
-          <div class="back-eye-emblem">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
-              <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/>
-              <circle cx="12" cy="12" r="2.5"/>
+          <div class="absolute inset-1.5 border border-[#E5B24C]/40 rounded-lg pointer-events-none"></div>
+          <span class="text-[11px] text-[#F5EBD6] tracking-widest">✦ ${numStr} ✦</span>
+          <div class="w-12 h-12 rounded-full border border-[#E5B24C]/65 bg-[#F7F4ED]/10 flex items-center justify-center p-1">
+            <svg class="w-full h-full" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="60" r="54" stroke="#E5B24C" stroke-width="3"/>
+              <line x1="46" y1="22" x2="50" y2="30" stroke="#E5B24C" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="74" y1="22" x2="70" y2="30" stroke="#E5B24C" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="25" y1="38" x2="33" y2="43" stroke="#E5B24C" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="95" y1="38" x2="87" y2="43" stroke="#E5B24C" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="18" y1="62" x2="27" y2="62" stroke="#E5B24C" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="102" y1="62" x2="93" y2="62" stroke="#E5B24C" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M60 112V45" stroke="#F7F4ED" stroke-width="3.4" stroke-linecap="round"/>
+              <path d="M60 14C46 27 45 45 60 56C75 45 74 27 60 14Z" fill="#F7F4ED"/>
+              <path d="M60 66C48 56 36 53 23 55C29 66 43 70 60 66Z" fill="#F7F4ED"/>
+              <path d="M52 57C46 47 40 40 31 36C31 46 39 54 52 57Z" fill="#F7F4ED"/>
+              <path d="M60 66C72 56 84 53 97 55C91 66 77 70 60 66Z" fill="#F7F4ED"/>
+              <path d="M68 57C74 47 80 40 89 36C89 46 81 54 68 57Z" fill="#F7F4ED"/>
+              <path d="M60 94C48 88 39 81 31 73" stroke="#F7F4ED" stroke-width="2.6" stroke-linecap="round"/>
+              <circle cx="30" cy="72" r="3.2" fill="#F7F4ED"/>
+              <path d="M60 96C72 90 81 82 89 73" stroke="#F7F4ED" stroke-width="2.6" stroke-linecap="round"/>
+              <circle cx="90" cy="72" r="3.2" fill="#F7F4ED"/>
             </svg>
           </div>
-          <div class="back-brand-text">森呼吸</div>
+          <span class="font-serif text-[11px] text-[#F5EBD6] tracking-[0.16em]">森心養生</span>
         `;
         el.onclick = () => openPrescription(card);
         scroller.appendChild(el);
       });
     }
 
+    // 重新洗牌動畫
     function triggerShuffle() {
       shuffleCards(activeDeck);
       renderDeckCarousel();
-      document.querySelectorAll(".tarot-card-back").forEach((el, i) => {
+      document.querySelectorAll(".tarot-back-card").forEach((el, i) => {
         setTimeout(() => el.classList.add("is-shuffling"), (i % 10) * 25);
       });
     }
 
+    // 左右導覽箭頭滑動
     function scrollDeckBy(offset) {
       document.getElementById("deck-scroller").scrollBy({ left: offset, behavior: "smooth" });
     }
 
+    // 展開處方籤結果頁
     function openPrescription(card) {
       document.getElementById("rx-header-pill").textContent = card.isMajor
         ? "大阿爾克那｜深層調理複方"
@@ -1664,38 +966,50 @@
       document.getElementById("rx-formula-chip").textContent = card.isMajor ? "深層複方調理" : "單方精油調理";
       document.getElementById("rx-chem-desc").textContent = card.chem;
 
+      // 帶入建議基底油與現場調配滴數
       const carrierInfo = CARRIER_PRESETS[card.carrier] || CARRIER_PRESETS.almond;
       document.getElementById("rx-carrier-name").textContent = `🧴 建議基底油：${carrierInfo.name}`;
       document.getElementById("rx-carrier-drops").textContent = card.isMajor ? carrierInfo.dropsMajor : carrierInfo.dropsMinor;
       document.getElementById("rx-carrier-guide").textContent = carrierInfo.guide;
 
+      // 填入同象限替換建議膠囊
       const swapList = QUADRANT_SWAPS[card.quadrant] || QUADRANT_SWAPS["全象限深度調和"];
       const chipContainer = document.getElementById("swap-chip-list");
-      chipContainer.innerHTML = swapList.map(item => `<div class="swap-oil-chip">${item}</div>`).join("");
-      document.getElementById("swap-panel").classList.remove("open");
+      chipContainer.innerHTML = swapList.map(item =>
+        `<div class="bg-[#F4F7F4] border border-sage-border rounded-lg px-3 py-2 text-xs sm:text-sm text-ink-main font-medium">${item}</div>`
+      ).join("");
+
+      document.getElementById("swap-panel").classList.add("hidden");
       document.getElementById("swap-chevron").textContent = "⌄";
 
+      // 重新觸發翻牌動畫
       const faceCard = document.getElementById("tarot-face-card");
-      faceCard.style.animation = "none";
-      faceCard.offsetHeight;
-      faceCard.style.animation = null;
+      faceCard.classList.remove("animate-reveal");
+      void faceCard.offsetWidth;
+      faceCard.classList.add("animate-reveal");
 
       switchView("view-result");
     }
 
+    // 展開/收合現場試聞氣味微調手風琴
     function toggleSwapPanel() {
       const panel = document.getElementById("swap-panel");
-      const isOpen = panel.classList.toggle("open");
-      document.getElementById("swap-chevron").textContent = isOpen ? "⌃" : "⌄";
+      const isHidden = panel.classList.toggle("hidden");
+      document.getElementById("swap-chevron").textContent = isHidden ? "⌄" : "⌃";
     }
 
+    // 芳療師速查表彈窗控制
     function openRefModal() {
       renderRefTable();
-      document.getElementById("ref-modal").classList.add("open");
+      const modal = document.getElementById("ref-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
     }
 
     function closeRefModal() {
-      document.getElementById("ref-modal").classList.remove("open");
+      const modal = document.getElementById("ref-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
     }
 
     function handleModalBackdrop(e) {
@@ -1703,10 +1017,22 @@
     }
 
     function switchModalView(mode) {
-      document.getElementById("m-tab-quad").classList.toggle("active", mode === "quad");
-      document.getElementById("m-tab-db").classList.toggle("active", mode === "db");
-      document.getElementById("m-view-quad").style.display = mode === "quad" ? "block" : "none";
-      document.getElementById("m-view-db").style.display = mode === "db" ? "block" : "none";
+      const tabQuad = document.getElementById("m-tab-quad");
+      const tabDb = document.getElementById("m-tab-db");
+      const viewQuad = document.getElementById("m-view-quad");
+      const viewDb = document.getElementById("m-view-db");
+
+      if (mode === "quad") {
+        viewQuad.classList.remove("hidden");
+        viewDb.classList.add("hidden");
+        tabQuad.className = "flex-1 py-3 px-2 text-xs sm:text-sm font-semibold bg-white text-sage-deep border-b-2 border-sage-deep cursor-pointer";
+        tabDb.className = "flex-1 py-3 px-2 text-xs sm:text-sm font-semibold text-ink-sub hover:text-sage-deep cursor-pointer";
+      } else {
+        viewQuad.classList.add("hidden");
+        viewDb.classList.remove("hidden");
+        tabDb.className = "flex-1 py-3 px-2 text-xs sm:text-sm font-semibold bg-white text-sage-deep border-b-2 border-sage-deep cursor-pointer";
+        tabQuad.className = "flex-1 py-3 px-2 text-xs sm:text-sm font-semibold text-ink-sub hover:text-sage-deep cursor-pointer";
+      }
     }
 
     function renderRefTable() {
@@ -1725,12 +1051,17 @@
         const cInfo = CARRIER_PRESETS[card.carrier] || CARRIER_PRESETS.almond;
         const shortCarrier = cInfo.name.split("（")[0];
         const tr = document.createElement("tr");
+        tr.className = "hover:bg-cream-card transition";
         tr.innerHTML = `
-          <td><strong>${card.name}</strong></td>
-          <td>${card.isMajor ? "大牌複方" : "小牌單方"}</td>
-          <td>${card.oil}</td>
-          <td>${shortCarrier}</td>
-          <td><button class="btn-preview-sm" onclick="previewFromRef(${card.id})">預覽處方</button></td>
+          <td class="py-2.5 px-2 font-semibold text-sage-deep">${card.name}</td>
+          <td class="py-2.5 px-2 text-ink-sub">${card.isMajor ? "大牌複方" : "小牌單方"}</td>
+          <td class="py-2.5 px-2 font-medium text-gold-dark">${card.oil}</td>
+          <td class="py-2.5 px-2 text-ink-sub">${shortCarrier}</td>
+          <td class="py-2.5 px-2">
+            <button type="button" onclick="previewFromRef(${card.id})" class="px-3 py-1.5 rounded-full bg-sage-soft hover:bg-sage-deep hover:text-white text-sage-deep text-xs font-medium transition cursor-pointer">
+              預覽處方
+            </button>
+          </td>
         `;
         tbody.appendChild(tr);
       });
@@ -1743,6 +1074,11 @@
         openPrescription(card);
       }
     }
+
+    // 視窗載入初始化
+    window.onload = function () {
+      renderDeckCarousel();
+    };
   </script>
 </body>
 </html>
