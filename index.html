@@ -355,7 +355,7 @@
               </div>
 
               <p class="text-[11px] text-ink-muted text-center leading-relaxed mt-3 max-w-[230px]">
-                此香氣指南依據《L'Aromathérapie Exactement》植萃香調與 Florihana 植物油模型匹配
+                此香氣指南依據天然植物油與 16 支核心單方精油感官調性模型匹配
               </p>
             </div>
 
@@ -373,7 +373,7 @@
                   <span>💧 今日命定精油與基底油建議</span>
                 </div>
                 <div id="rx-quadrant-pill" class="inline-block bg-sage-deep text-white text-xs px-3.5 py-1.5 rounded-full tracking-wider mb-2.5">
-                  水潤清涼調｜思緒降溫與輕盈舒緩
+                  水潤清涼調｜柑橘與果實植萃
                 </div>
 
                 <!-- 單方/複方精油卡 -->
@@ -397,12 +397,12 @@
                 <!-- 現場試聞氣味微調手風琴 -->
                 <div class="border border-sage-border bg-cream-base rounded-xl mb-5 overflow-hidden">
                   <button type="button" onclick="toggleSwapPanel()" class="w-full px-4 py-3 min-h-[44px] flex items-center justify-between gap-2 text-xs sm:text-sm font-semibold text-sage-deep text-left cursor-pointer">
-                    <span>＋ 現場試聞氣味微調（同香調替換建議）</span>
+                    <span>＋ 現場試聞氣味微調（同調性替換建議）</span>
                     <span id="swap-chevron" class="text-base leading-none">⌄</span>
                   </button>
                   <div id="swap-panel" class="hidden px-4 pt-3 pb-4 bg-white border-t border-sage-border">
                     <p class="text-xs text-ink-sub leading-relaxed mb-2.5">
-                      若現場試聞後想微調香氣，可隨時請調香師為您更換以下<strong class="text-ink-main">同香調・同等舒壓氛圍</strong>的 Florihana 單方精油：
+                      若現場試聞後想微調香氣，可隨時請調香師為您更換以下<strong class="text-ink-main">同調性・同等舒壓氛圍</strong>的純植物單方精油：
                     </p>
                     <div id="swap-chip-list" class="flex flex-col gap-2"></div>
                   </div>
@@ -430,7 +430,7 @@
     <footer class="w-full max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-ink-muted text-center">
       <span>森心養生 SENXIN YANGSHENG 專屬植萃香氛系統</span>
       <span>•</span>
-      <span>78 張完整塔羅 × 植物精油四大香調官能基對照</span>
+      <span>78 張完整塔羅 × 16 支核心單方精油與基底油對照</span>
     </footer>
   </div>
 
@@ -438,28 +438,28 @@
   <div id="ref-modal" onclick="handleModalBackdrop(event)" class="hidden fixed inset-0 bg-[#1A241F]/60 backdrop-blur-xs z-50 items-center justify-center p-3 sm:p-5">
     <div class="bg-white w-full max-w-4xl max-h-[88vh] rounded-2xl flex flex-col overflow-hidden shadow-2xl">
       <div class="bg-sage-deep text-white px-5 py-4 flex items-center justify-between gap-3">
-        <h3 class="font-serif text-sm sm:text-base font-medium tracking-wider">🌿 森心養生｜調香師速查表（Florihana 四大香調 × 基底油調配）</h3>
+        <h3 class="font-serif text-sm sm:text-base font-medium tracking-wider">🌿 森心養生｜調香師速查表（16 支核心單方精油 × 基底油調配）</h3>
         <button type="button" onclick="closeRefModal()" aria-label="關閉視窗" class="text-white/80 hover:text-white text-2xl leading-none px-1.5 cursor-pointer">&times;</button>
       </div>
 
       <!-- Modal 分頁切換 -->
       <div class="flex bg-cream-base border-b border-sage-border">
         <button type="button" id="m-tab-quad" onclick="switchModalView('quad')" class="flex-1 py-3 px-2 text-xs sm:text-sm font-semibold bg-white text-sage-deep border-b-2 border-sage-deep cursor-pointer">
-          四大香調精油與基底油指南
+          四大調性 16 支核心單方與基底油
         </button>
         <button type="button" id="m-tab-db" onclick="switchModalView('db')" class="flex-1 py-3 px-2 text-xs sm:text-sm font-semibold text-ink-sub hover:text-sage-deep cursor-pointer">
           78 張完整牌庫一覽
         </button>
       </div>
 
-      <!-- 分頁 1：四大感官香調與 14 支核心油指南 -->
+      <!-- 分頁 1：四大感官調性與 16 支核心油指南 -->
       <div id="m-view-quad" class="p-4 sm:p-6 overflow-y-auto flex-1 space-y-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
           <div class="bg-cream-card border border-sage-border rounded-xl p-4">
-            <h4 class="font-serif text-sage-deep font-semibold text-base mb-1">1. 大地沉穩調（木質與根部植萃）</h4>
-            <div class="text-xs text-gold-dark font-semibold mb-2">官能基：酯類、倍半萜烯｜肩背厚重緊繃、壓力大難以深層放鬆</div>
+            <h4 class="font-serif text-sage-deep font-semibold text-base mb-1">1. 大地沉穩調（木質、樹脂與根部植萃）</h4>
+            <div class="text-xs text-gold-dark font-semibold mb-2">官能基：酯類、倍半萜烯、倍半萜醇｜肩背厚重緊繃、壓力大難以深層放鬆</div>
             <p class="text-xs sm:text-sm text-ink-sub leading-relaxed">
-              <strong class="text-ink-main">Florihana 核心單方：</strong>高地真正薰衣草、快樂鼠尾草、羅馬洋甘菊、大西洋雪松、岩蘭草。<br />
+              <strong class="text-ink-main">核心單方精油（6支）：</strong>高地真正薰衣草、快樂鼠尾草、羅馬洋甘菊、大西洋雪松、岩蘭草、<strong class="text-sage-deep">乳香（正能量樹脂調）</strong>。<br />
               <strong class="text-ink-main">基底油搭檔：</strong>甜杏仁油 20ml（深層鬆肌推拿）；肩頸腰背緊繃可加入 20% 聖約翰草浸泡油。
             </p>
           </div>
@@ -467,7 +467,7 @@
             <h4 class="font-serif text-sage-deep font-semibold text-base mb-1">2. 水潤清涼調（柑橘與果實植萃）</h4>
             <div class="text-xs text-gold-dark font-semibold mb-2">官能基：醛類、香豆素｜思緒煩躁過熱、情緒悶悶需要輕盈降溫</div>
             <p class="text-xs sm:text-sm text-ink-sub leading-relaxed">
-              <strong class="text-ink-main">Florihana 核心單方：</strong>無光敏佛手柑 (FCF)、山雞椒、高地真正薰衣草、玫瑰天竺葵。<br />
+              <strong class="text-ink-main">核心單方精油（2支）：</strong>無光敏佛手柑 (FCF)、山雞椒（可搭配高地真正薰衣草、玫瑰天竺葵）。<br />
               <strong class="text-ink-main">基底油搭檔：</strong>荷荷芭油 20ml（或與甜杏仁油 1:1 混合），清爽好吸收不黏膩。
             </p>
           </div>
@@ -475,15 +475,15 @@
             <h4 class="font-serif text-sage-deep font-semibold text-base mb-1">3. 微風花草調（花朵與葉片植萃）</h4>
             <div class="text-xs text-gold-dark font-semibold mb-2">官能基：單萜醇、倍半萜醇｜用腦過度、心神耗損需要溫柔包覆</div>
             <p class="text-xs sm:text-sm text-ink-sub leading-relaxed">
-              <strong class="text-ink-main">Florihana 核心單方：</strong>芳樟、玫瑰天竺葵、甜馬鬱蘭、澳洲檀香。<br />
+              <strong class="text-ink-main">核心單方精油（4支）：</strong>芳樟、玫瑰天竺葵、甜馬鬱蘭、澳洲檀香。<br />
               <strong class="text-ink-main">基底油搭檔：</strong>甜杏仁油 20ml（或搭配聖約翰草浸泡油安撫緊繃部位）。
             </p>
           </div>
           <div class="bg-cream-card border border-sage-border rounded-xl p-4">
-            <h4 class="font-serif text-sage-deep font-semibold text-base mb-1">4. 陽光暖木調（果皮與針葉植萃）</h4>
+            <h4 class="font-serif text-sage-deep font-semibold text-base mb-1">4. 陽光暖木調（果皮、針葉與香料葉片）</h4>
             <div class="text-xs text-gold-dark font-semibold mb-2">官能基：單萜烯、氧化物｜疲憊無力、胸口悶淺需要注入森林元氣</div>
             <p class="text-xs sm:text-sm text-ink-sub leading-relaxed">
-              <strong class="text-ink-main">Florihana 核心單方：</strong>甜橙、黑雲杉、澳洲尤加利（搭配甜馬鬱蘭舒展肩頸肌理）。<br />
+              <strong class="text-ink-main">核心單方精油（4支）：</strong>甜橙、黑雲杉、澳洲尤加利、<strong class="text-sage-deep">月桂葉（正能量自信調）</strong>。<br />
               <strong class="text-ink-main">基底油搭檔：</strong>甜杏仁油 20ml（順滑推開緊繃肌肉，適合深層背部油壓）。
             </p>
           </div>
@@ -491,7 +491,7 @@
 
         <!-- 3 款核心基底油速查卡 -->
         <div class="bg-cream-warm border border-[#DFD2B8] rounded-xl p-4">
-          <h4 class="font-serif text-[#6E5120] font-semibold text-sm sm:text-base mb-2">🧴 Florihana 3 款核心基底油現場調配標準（20ml 基準）</h4>
+          <h4 class="font-serif text-[#6E5120] font-semibold text-sm sm:text-base mb-2">🧴 3 款核心植物基底油現場調配標準（20ml 基準）</h4>
           <ul class="text-xs sm:text-sm text-ink-sub space-y-1.5 leading-relaxed">
             <li>• <strong class="text-ink-main">甜杏仁油 20ml：</strong>主力萬用滑順推拿油。全身 2% 共 <strong>8 滴</strong>（大牌複方建議主調 5 滴＋輔助 3 滴）；局部深層放鬆 3% 共 <strong>12 滴</strong>。</li>
             <li>• <strong class="text-ink-main">荷荷芭油 20ml：</strong>分子近皮脂、清爽不悶肌，適合水感輕盈按摩、夏季或頭部肩頸（局部建議 1% 共 4 滴）。</li>
@@ -502,7 +502,7 @@
 
       <!-- 分頁 2：78 張完整牌庫與基底油對照一覽 -->
       <div id="m-view-db" class="hidden p-4 sm:p-6 overflow-y-auto overflow-x-auto flex-1">
-        <input type="text" id="ref-search" oninput="renderRefTable()" placeholder="搜尋牌名、精油、基底油或部位（例如：佛手柑、聖約翰草、肩頸）..." class="w-full px-3.5 py-2.5 mb-3.5 rounded-xl border border-sage-border text-base sm:text-sm focus:outline-none focus:border-sage-deep" />
+        <input type="text" id="ref-search" oninput="renderRefTable()" placeholder="搜尋牌名、精油（如：乳香、月桂葉）、基底油或部位（如：肩頸）..." class="w-full px-3.5 py-2.5 mb-3.5 rounded-xl border border-sage-border text-base sm:text-sm focus:outline-none focus:border-sage-deep" />
         <table class="w-full min-w-[520px] border-collapse text-xs sm:text-sm">
           <thead>
             <tr class="bg-cream-base text-sage-deep border-b border-sage-border">
@@ -529,7 +529,7 @@
       pentacles: `<svg class="w-11 h-11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`
     };
 
-    // 芳療家（Florihana）3 款核心基底油設定（100% 台灣法規合規用語）
+    // 3 款核心植物基底油設定（100% 台灣法規合規用語，無特定品牌字樣）
     const CARRIER_PRESETS = {
       almond: {
         name: "甜杏仁油 20ml（主力滑順推拿）",
@@ -551,16 +551,17 @@
       }
     };
 
-    // 四大感官香調標籤常量
-    const TONE_EARTH = "大地沉穩調｜木質與根部植萃";
+    // 四大感官調性標籤常量
+    const TONE_EARTH = "大地沉穩調｜木質、樹脂與根部植萃";
     const TONE_WATER = "水潤清涼調｜柑橘與果實植萃";
     const TONE_WIND  = "微風花草調｜花朵與葉片植萃";
-    const TONE_FIRE  = "陽光暖木調｜果皮與針葉植萃";
-    const TONE_ALL   = "全香調深度調和｜全方位感官滋養";
+    const TONE_FIRE  = "陽光暖木調｜果皮、針葉與香料葉片";
+    const TONE_ALL   = "全調性深度調和｜全方位感官滋養";
 
-    // 同香調 Florihana 14 核心單方替換建議（100% 台灣法規合規用語）
+    // 同調性 16 支核心單方替換建議（包含「乳香」與「月桂葉」）
     const QUADRANT_SWAPS = {
       [TONE_EARTH]: [
+        "乳香（單萜烯＋樹脂醇｜溫潤樹脂調，自然放慢急促呼吸）",
         "大西洋雪松（倍半萜烯｜深層鬆肌與木質沉靜）",
         "岩蘭草（倍半萜烯｜極致接地與深層安神）",
         "高地真正薰衣草（酯類｜全方位溫柔撫慰）",
@@ -580,20 +581,21 @@
         "澳洲檀香（倍半萜醇｜沉靜安神與肌膚滋養）"
       ],
       [TONE_FIRE]: [
+        "月桂葉（氧化物＋單萜醇｜清亮葉片香氣，帶來開闊與自信感）",
         "甜橙（單萜烯｜陽光提振與溫暖氛圍）",
         "黑雲杉（單萜烯｜森林正電與元氣支持）",
         "澳洲尤加利（氧化物｜打開胸廓深呼吸感）",
         "甜馬鬱蘭（單萜醇｜舒緩肩頸緊繃沉重）"
       ],
       [TONE_ALL]: [
-        "保留主調精油，另一支可依現場嗅覺喜好微調為：高地真正薰衣草（安撫）",
-        "保留主調精油，另一支可依現場嗅覺喜好微調為：無光敏佛手柑 FCF（開朗）",
-        "保留主調精油，另一支可依現場嗅覺喜好微調為：甜橙（溫暖）",
-        "保留主調精油，另一支可依現場嗅覺喜好微調為：大西洋雪松（沉穩）"
+        "保留主調精油，另一支可依現場嗅覺喜好微調為：乳香（寧靜定心）",
+        "保留主調精油，另一支可依現場嗅覺喜好微調為：月桂葉（清亮自信）",
+        "保留主調精油，另一支可依現場嗅覺喜好微調為：高地真正薰衣草（溫柔安撫）",
+        "保留主調精油，另一支可依現場嗅覺喜好微調為：無光敏佛手柑 FCF（陽光開朗）"
       ]
     };
 
-    // 完整 78 張塔羅牌資料庫（融入具體身體部位與日常體感，100% 無器官與醫療字眼）
+    // 完整 78 張塔羅牌資料庫（融入「乳香」與「月桂葉」及具體身體部位體感，100% 合規）
     const TAROT_DECK = [
       // === 22 張大阿爾克那（複方） ===
       { id: 0, name: "0. 愚人", en: "THE FOOL", isMajor: true, symbol: "major", elementTag: "風元素・輕盈新生", quadrant: TONE_FIRE, carrier: "jojoba",
@@ -605,9 +607,9 @@
         oil: "山雞椒 ＋ 芳樟",
         chem: "醛類 ＋ 單萜醇（水潤清涼調）：幫過熱的大腦降溫，同時帶來溫和清爽感，讓思緒清晰而不焦躁。" },
       { id: 2, name: "II. 女祭司", en: "THE HIGH PRIESTESS", isMajor: true, symbol: "major", elementTag: "水元素・內在靜謐", quadrant: TONE_EARTH, carrier: "jojoba",
-        reading: "你最近接收了太多外界的聲音與訊息，兩側頭皮與肩頸容易感到疲累。這是一張邀請你向內傾聽、在靜謐香氣中好好與自己獨處的牌。",
-        oil: "澳洲檀香 ＋ 高地真正薰衣草",
-        chem: "倍半萜醇 ＋ 酯類（大地沉穩調）：深層安撫緊繃情緒，帶領意識回到平靜的內在中心。" },
+        reading: "你最近接收了太多外界的聲音與訊息，兩側頭皮與肩頸容易感到疲累。這是一張邀請你向內傾聽、在靜謐的樹脂與花草香氣中好好與自己獨處的牌。",
+        oil: "乳香 ＋ 高地真正薰衣草",
+        chem: "單萜烯與樹脂醇 ＋ 酯類（大地沉穩調）：溫潤深沉的乳香自然放慢急促呼吸，搭配高地薰衣草撫平緊繃，帶領意識回到平靜的內在中心。" },
       { id: 3, name: "III. 皇后", en: "THE EMPRESS", isMajor: true, symbol: "major", elementTag: "土元素・豐盛滋養", quadrant: TONE_WIND, carrier: "almond",
         reading: "你一直在照顧身邊的人，現在輪到你被好好滋養了。肌膚與緊繃的肩背渴望溫暖的包覆與寵愛，讓全身肌理都柔軟下來。",
         oil: "玫瑰天竺葵 ＋ 甜橙",
@@ -616,10 +618,10 @@
         reading: "你扛起了許多責任，習慣凡事撐住，連整個上背與腰脊都在不知不覺中武裝得硬邦邦。今天請允許自己卸下盔甲，把重量交給按摩床。",
         oil: "黑雲杉 ＋ 大西洋雪松",
         chem: "單萜烯 ＋ 倍半萜烯（陽光暖木調）：為疲憊的身心注入森林元氣支持，同時深層鬆開僵硬背肌。" },
-      { id: 5, name: "V. 教皇", en: "THE HIEROPHANT", isMajor: true, symbol: "major", elementTag: "土元素・安定呼吸", quadrant: TONE_WIND, carrier: "almond",
-        reading: "內心有些自我要求或規則讓你感到喘不過氣，胸口與肩胛骨之間容易覺得悶悶緊緊的。身體需要一種穩定、被支持的安全感。",
-        oil: "澳洲檀香 ＋ 無光敏佛手柑 (FCF)",
-        chem: "倍半萜醇 ＋ 酯類與香豆素（微風花草調）：加深呼吸節奏，化解內在的拘謹與無形壓力。" },
+      { id: 5, name: "V. 教皇", en: "THE HIEROPHANT", isMajor: true, symbol: "major", elementTag: "土元素・安定呼吸", quadrant: TONE_EARTH, carrier: "almond",
+        reading: "內心有些自我要求或規則讓你感到喘不過氣，胸口與肩胛骨之間容易覺得悶悶緊緊的。身體需要一種神聖、穩定且被支持的安全感。",
+        oil: "乳香 ＋ 無光敏佛手柑 (FCF)",
+        chem: "樹脂醇 ＋ 酯類與香豆素（大地沉穩調）：乳香加深呼吸節奏，結合陽光佛手柑化解內在的拘謹與無形壓力。" },
       { id: 6, name: "VI. 戀人", en: "THE LOVERS", isMajor: true, symbol: "major", elementTag: "風元素・心輪和諧", quadrant: TONE_WIND, carrier: "almond",
         reading: "你正在尋找身與心的和諧共鳴。也許最近在關係或選擇上有些微的拉扯，讓胸口與雙臂外側微感緊縮，需要讓心輪重新打開、恢復柔軟。",
         oil: "玫瑰天竺葵 ＋ 快樂鼠尾草",
@@ -634,8 +636,8 @@
         chem: "酯類 ＋ 香豆素（水潤清涼調）：安撫緊繃的感官與肌理，用陽光般的香氣融化內在的硬撐。" },
       { id: 9, name: "IX. 隱士", en: "THE HERMIT", isMajor: true, symbol: "major", elementTag: "土元素・深度靜心", quadrant: TONE_EARTH, carrier: "almond",
         reading: "你需要暫時關掉外界的喧囂，給自己一段不被打擾的放鬆時光。這是一張適合深度靜心、釋放背部與頭肩深層疲勞的牌。",
-        oil: "大西洋雪松 ＋ 澳洲檀香",
-        chem: "倍半萜烯 ＋ 倍半萜醇（大地沉穩調）：深沉木質調，把向外耗散的能量全部收攝回體內休養。" },
+        oil: "大西洋雪松 ＋ 乳香",
+        chem: "倍半萜烯 ＋ 樹脂木質調（大地沉穩調）：沉穩木質搭配古樹乳香，把向外耗散的能量全部收攝回體內休養。" },
       { id: 10, name: "X. 命運之輪", en: "WHEEL OF FORTUNE", isMajor: true, symbol: "major", elementTag: "火元素・節奏對齊", quadrant: TONE_FIRE, carrier: "almond",
         reading: "生活正處於節奏轉換的路口，身體可能因為適應變化而感到微微失衡或四肢沉重。順應流動，讓今天的油壓幫你重新對齊身心節奏。",
         oil: "甜橙 ＋ 甜馬鬱蘭",
@@ -650,8 +652,8 @@
         chem: "氧化物 ＋ 倍半萜烯（陽光暖木調）：打開受限的呼吸空間，帶來輕盈流暢的按摩節奏。" },
       { id: 13, name: "XIII. 死神", en: "DEATH", isMajor: true, symbol: "major", elementTag: "水元素・卸除重擔", quadrant: TONE_FIRE, carrier: "almond",
         reading: "舊的疲憊與情緒負擔正準備離開你的身體，這是一個「徹底卸除沉重、重新啟動」的時刻。放心地把肩背累積已久的疲勞都交出來吧。",
-        oil: "黑雲杉 ＋ 大西洋雪松",
-        chem: "單萜烯 ＋ 倍半萜烯（陽光暖木調）：掃除停滯的沉重感與累積疲勞，迎接身心煥然一新。" },
+        oil: "月桂葉 ＋ 岩蘭草",
+        chem: "單萜烯 ＋ 倍半萜烯（陽光暖木調）：月桂葉清亮穿透打破停滯沉悶，岩蘭草深沉接地帶走累積疲勞，迎接身心煥然一新。" },
       { id: 14, name: "XIV. 節制", en: "TEMPERANCE", isMajor: true, symbol: "major", elementTag: "火元素・溫潤調和", quadrant: TONE_WIND, carrier: "jojoba",
         reading: "你的身體正在努力尋找自我平衡的節奏。這是一張非常溫和的舒緩牌，適合用如流水般順暢的長推手法，調和全身的水潤與氣場。",
         oil: "芳樟 ＋ 高地真正薰衣草",
@@ -676,22 +678,22 @@
         reading: "你的活力正在回升，或正準備迎接充滿朝氣的新階段！今天的精油將為你點燃內在的小太陽，讓全身從肩背到腳底都充滿暖意。",
         oil: "甜橙 ＋ 黑雲杉",
         chem: "高比例單萜烯（陽光暖木調）：充滿陽光與森林正電能量的組合，提振精神、消除倦怠。" },
-      { id: 20, name: "XX. 審判", en: "JUDGEMENT", isMajor: true, symbol: "major", elementTag: "火元素・活力喚醒", quadrant: TONE_FIRE, carrier: "jojoba",
-        reading: "身體正在喚醒沉睡已久的內在活力。這是一個身心重新開機、找回輕盈感的重要時刻，深呼吸，迎接全身鬆開後的全新自己。",
-        oil: "澳洲尤加利 ＋ 玫瑰天竺葵",
-        chem: "氧化物 ＋ 單萜醇（陽光暖木調）：清新的呼吸感搭配花香的滋養，喚醒身心每一寸活力。" },
+      { id: 20, name: "XX. 審判", en: "JUDGEMENT", isMajor: true, symbol: "major", elementTag: "火元素・自信煥新", quadrant: TONE_FIRE, carrier: "jojoba",
+        reading: "身體正在喚醒沉睡已久的內在活力與自信。這是一個身心重新開機、找回輕盈感的重要時刻，深呼吸，迎接全身鬆開後的全新自己。",
+        oil: "月桂葉 ＋ 玫瑰天竺葵",
+        chem: "氧化物與單萜醇（陽光暖木調）：清亮提振的月桂葉搭配溫柔花香，掃除疲憊低落，喚醒身心每一寸自信活力。" },
       { id: 21, name: "XXI. 世界", en: "THE WORLD", isMajor: true, symbol: "major", elementTag: "土元素・身心圓滿", quadrant: TONE_ALL, carrier: "almond",
-        reading: "恭喜你完成了一段不簡單的旅程，現在是犒賞自己、享受完整與圓滿的時刻。讓這場從頭到腳的香氣之旅，為你畫下最完美的句點。",
-        oil: "澳洲檀香 ＋ 無光敏佛手柑 (FCF) ＋ 甜橙",
-        chem: "倍半萜醇 ＋ 酯類 ＋ 單萜烯（全香調深度調和）：兼具穩定、安撫與愉悅的完美交響，帶來全方位的身心圓滿。" },
+        reading: "恭喜你完成了一段不簡單的旅程，現在是犒賞自己、享受完整與圓滿的時刻。讓這場融合古樹乳香與陽光柑橘的香氣之旅，為你畫下完美句點。",
+        oil: "乳香 ＋ 無光敏佛手柑 (FCF) ＋ 甜橙",
+        chem: "樹脂木質調 ＋ 酯類 ＋ 單萜烯（全調性深度調和）：兼具寧靜定心、溫柔安撫與愉悅朝氣的完美交響，帶來全方位的身心圓滿。" },
 
       // === 權杖牌組 14 張（單方） ===
       { id: 22, name: "權杖 Ace", en: "ACE OF WANDS", isMajor: false, symbol: "wands", elementTag: "火元素・活力點燃", quadrant: TONE_FIRE, carrier: "almond",
         reading: "內心正燃起一股新的熱情與動力，身體也準備好迎接新開始。需要一點陽光的香氣能量，幫你點燃活力、暖和四肢。",
         oil: "甜橙", chem: "單萜烯（陽光暖木調）：帶來溫暖愉悅的陽光能量，活絡全身溫暖舒適感。" },
-      { id: 23, name: "權杖 2", en: "TWO OF WANDS", isMajor: false, symbol: "wands", elementTag: "火元素・脊柱支撐", quadrant: TONE_FIRE, carrier: "almond",
-        reading: "站在規劃與展望的十字路口，眼神看著遠方，雙肩卻不自覺微微聳起。先深呼吸，透過背部舒展把力量收回到當下。",
-        oil: "黑雲杉", chem: "單萜烯（陽光暖木調）：像高聳的針葉林般給予背部支撐力，穩定心神。" },
+      { id: 23, name: "權杖 2", en: "TWO OF WANDS", isMajor: false, symbol: "wands", elementTag: "火元素・自信展望", quadrant: TONE_FIRE, carrier: "almond",
+        reading: "站在規劃與展望的十字路口，眼神看著遠方，雙肩卻不自覺微微聳起。先深呼吸，讓清亮的葉片香氣為你帶來開闊與自信。",
+        oil: "月桂葉", chem: "氧化物 ＋ 單萜醇（陽光暖木調）：象徵榮耀與遠見的清亮香氣，提振低落士氣，讓肩背與思緒一起舒展開來。" },
       { id: 24, name: "權杖 3", en: "THREE OF WANDS", isMajor: false, symbol: "wands", elementTag: "火元素・溫熱舒展", quadrant: TONE_WIND, carrier: "almond",
         reading: "事情正在推進中，你付出了許多心力等待成果。雙腿與下背有些微的奔波疲累感，適合好好溫熱舒展筋骨。",
         oil: "甜馬鬱蘭", chem: "單萜醇（微風花草調）：溫熱舒緩奔波後的肌肉緊繃，讓身體重新暖起來。" },
@@ -701,9 +703,9 @@
       { id: 26, name: "權杖 5", en: "FIVE OF WANDS", isMajor: false, symbol: "wands", elementTag: "火元素・疏通鬱熱", quadrant: TONE_FIRE, carrier: "jojoba",
         reading: "外界似乎有些雜音或小競爭讓你感到微躁，胸口與肩頸有一股悶熱感。需要清涼的森林微風幫你理順氣場。",
         oil: "澳洲尤加利", chem: "氧化物（陽光暖木調）：釋放胸口鬱悶的燥熱感，讓呼吸重新變得寬敞順暢。" },
-      { id: 27, name: "權杖 6", en: "SIX OF WANDS", isMajor: false, symbol: "wands", elementTag: "火元素・能量降落", quadrant: TONE_FIRE, carrier: "almond",
-        reading: "你剛剛完成了一項重要任務，精神亢奮但肩背肌肉其實已經很累了。現在可以安心把光環卸下，交給雙手照顧。",
-        oil: "黑雲杉", chem: "單萜烯（陽光暖木調）：補充身心森林元氣，幫助亢奮的思緒平穩降落。" },
+      { id: 27, name: "權杖 6", en: "SIX OF WANDS", isMajor: false, symbol: "wands", elementTag: "火元素・榮耀放鬆", quadrant: TONE_FIRE, carrier: "almond",
+        reading: "你剛剛完成了一項重要任務，精神亢奮但肩背肌肉其實已經很累了。現在可以安心卸下緊繃，享受被溫柔肯定的放鬆時光。",
+        oil: "月桂葉", chem: "氧化物 ＋ 單萜醇（陽光暖木調）：清亮微辛的桂冠香氣，肯定你的每一份努力，同時溫和舒緩肩背緊繃。" },
       { id: 28, name: "權杖 7", en: "SEVEN OF WANDS", isMajor: false, symbol: "wands", elementTag: "火元素・卸下防禦", quadrant: TONE_WIND, carrier: "stjohns",
         reading: "感覺最近一直在防禦、應付各種突發狀況，上背部與肩胛骨內側（膏肓處）特別僵硬。在這裡很安全，不用再武裝自己了。",
         oil: "甜馬鬱蘭", chem: "單萜醇（微風花草調）：軟化長期處於防禦狀態的僵硬背肌，帶來安全感。" },
@@ -748,9 +750,9 @@
       { id: 41, name: "聖杯 6", en: "SIX OF CUPS", isMajor: false, symbol: "cups", elementTag: "水元素・內在小孩", quadrant: TONE_EARTH, carrier: "almond",
         reading: "內在小孩正在呼喚你，渴望回到單純、無憂無慮、被無條件呵護的狀態。安心閉上眼睛，享受這份純粹的照顧。",
         oil: "羅馬洋甘菊", chem: "酯類（大地沉穩調）：最溫柔的安撫力量，給內在小孩一個溫暖安全的擁抱。" },
-      { id: 42, name: "聖杯 7", en: "SEVEN OF CUPS", isMajor: false, symbol: "cups", elementTag: "水元素・收攏思緒", quadrant: TONE_WIND, carrier: "jojoba",
-        reading: "腦海中有太多想像、願望或未決定的事，讓能量有點飄浮不定、眉心微皺。需要把分散的思緒收攏，重新回到身體裡。",
-        oil: "芳樟", chem: "單萜醇（微風花草調）：溫和定心，幫飄在雲端的思緒找到安穩的落腳處。" },
+      { id: 42, name: "聖杯 7", en: "SEVEN OF CUPS", isMajor: false, symbol: "cups", elementTag: "水元素・靜心定錨", quadrant: TONE_EARTH, carrier: "jojoba",
+        reading: "腦海中有太多想像、願望或未決定的事，讓能量有點飄浮不定、眉心微皺。需要溫潤深沉的古樹樹脂香氣，幫飄浮的思緒安穩落腳。",
+        oil: "乳香", chem: "單萜烯 ＋ 樹脂醇（大地沉穩調）：自然放慢急促呼吸，收攏散亂思緒，帶來寧靜踏實的定心感。" },
       { id: 43, name: "聖杯 8", en: "EIGHT OF CUPS", isMajor: false, symbol: "cups", elementTag: "水元素・情緒斷捨離", quadrant: TONE_EARTH, carrier: "almond",
         reading: "準備好揮別消耗你的人事物，踏上尋找內在平靜的旅程。這是一個斷捨離的時刻，讓身體把累積的情緒疲勞卸下來。",
         oil: "高地真正薰衣草", chem: "酯類（大地沉穩調）：清理殘留的情緒疲勞，平靜地迎接下一個階段。" },
@@ -775,8 +777,8 @@
 
       // === 寶劍牌組 14 張（單方） ===
       { id: 50, name: "寶劍 Ace", en: "ACE OF SWORDS", isMajor: false, symbol: "swords", elementTag: "風元素・清澈靈感", quadrant: TONE_FIRE, carrier: "jojoba",
-        reading: "腦袋裡有許多新想法正在醞釀，思緒銳利但容易讓兩側太陽穴與眉心緊繃。需要清涼的森林空氣感，讓靈感順暢流動。",
-        oil: "澳洲尤加利", chem: "氧化物（陽光暖木調）：帶來清澈透亮的深呼吸空間，讓思緒更清爽。" },
+        reading: "腦袋裡有許多新想法正在醞釀，思緒銳利但容易讓兩側太陽穴與眉心緊繃。需要清亮提振的葉片香氣，幫你打開清晰格局。",
+        oil: "月桂葉", chem: "氧化物 ＋ 單萜醇（陽光暖木調）：清亮穿透的葉片草本香，掃除眉心與頭部的沉悶感，帶來清晰與自信。" },
       { id: 51, name: "寶劍 2", en: "TWO OF SWORDS", isMajor: false, symbol: "swords", elementTag: "風元素・鬆開糾結", quadrant: TONE_EARTH, carrier: "stjohns",
         reading: "心裡似乎有兩個聲音在拉扯，讓你處於一種微微僵持、不敢放鬆的狀態，雙肩與上背硬硬的。暫時把選擇題放一邊，先讓身體休息。",
         oil: "快樂鼠尾草", chem: "酯類（大地沉穩調）：解除內在的糾結與肌理緊繃，讓僵硬的身體軟化下來。" },
@@ -842,9 +844,9 @@
       { id: 71, name: "錢幣 8", en: "EIGHT OF PENTACLES", isMajor: false, symbol: "pentacles", elementTag: "土元素・舒緩勞損", quadrant: TONE_WIND, carrier: "stjohns",
         reading: "非常認真、一絲不苟地完成手邊每件事，但也因此讓前臂、肩膀與上背部累積了不少工作疲勞。今天讓專業的雙手為你代勞。",
         oil: "甜馬鬱蘭", chem: "單萜醇（微風花草調）：專為日常累積的肌肉緊繃設計，溫熱舒緩辛勤工作的四肢與背肌。" },
-      { id: 72, name: "錢幣 9", en: "NINE OF PENTACLES", isMajor: false, symbol: "pentacles", elementTag: "土元素・質感犒賞", quadrant: TONE_WIND, carrier: "jojoba",
-        reading: "獨立自主、懂得照顧自己，今天這場植萃油壓正是你送給自己的質感犒賞！盡情享受這段純粹屬於你的優雅時光。",
-        oil: "澳洲檀香", chem: "倍半萜醇（微風花草調）：高雅沉靜的香氣，襯托你懂得愛自己的質感與從容。" },
+      { id: 72, name: "錢幣 9", en: "NINE OF PENTACLES", isMajor: false, symbol: "pentacles", elementTag: "土元素・質感犒賞", quadrant: TONE_EARTH, carrier: "jojoba",
+        reading: "獨立自主、懂得照顧自己，今天這場植萃油壓正是你送給自己的質感犒賞！讓溫潤高雅的古樹乳香包覆肌膚，盡情享受屬於你的優雅時光。",
+        oil: "乳香", chem: "單萜烯 ＋ 樹脂醇（大地沉穩調）：高雅溫潤的樹脂木質調，放慢呼吸節奏，襯托你懂得愛自己的質感與從容。" },
       { id: 73, name: "錢幣 10", en: "TEN OF PENTACLES", isMajor: false, symbol: "pentacles", elementTag: "土元素・安穩根基", quadrant: TONE_EARTH, carrier: "almond",
         reading: "渴望長久、穩固的活力與安適感。讓深沉的大地根部與木質精油，從足底到腰背為你的身體打下最安穩、放鬆的根基。",
         oil: "岩蘭草", chem: "倍半萜烯（大地沉穩調）：深層安定思緒與肌肉張力，帶來由內而外的踏實感。" },
@@ -984,7 +986,7 @@
       document.getElementById("rx-carrier-drops").textContent = card.isMajor ? carrierInfo.dropsMajor : carrierInfo.dropsMinor;
       document.getElementById("rx-carrier-guide").textContent = carrierInfo.guide;
 
-      // 填入同香調替換建議膠囊
+      // 填入同調性替換建議膠囊
       const swapList = QUADRANT_SWAPS[card.quadrant] || QUADRANT_SWAPS[TONE_ALL];
       const chipContainer = document.getElementById("swap-chip-list");
       chipContainer.innerHTML = swapList.map(item =>
